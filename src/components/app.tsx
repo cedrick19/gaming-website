@@ -22,8 +22,8 @@ import {
   BlockFooter,
 } from "framework7-react";
 
-import routes from "../js/routes";
-import store from "../js/store";
+import routes from "../ts/routes";
+import store from "../ts/store";
 
 const MyApp = () => {
   const [username, setUsername] = useState("");

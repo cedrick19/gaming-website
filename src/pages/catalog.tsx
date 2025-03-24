@@ -8,7 +8,7 @@ import {
   Button,
   useStore,
 } from "framework7-react";
-import store from "../js/store";
+import store from "../ts/store";
 
 interface Product {
   id: string;
