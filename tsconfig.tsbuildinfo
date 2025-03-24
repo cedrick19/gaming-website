@@ -1,0 +1,1 @@
+{"root":["./src/js/app.ts","./src/js/routes.ts","./src/js/store.ts","./src/pages/404.tsx","./src/pages/about.tsx","./src/pages/catalog.tsx","./src/pages/dynamic-route.tsx","./src/pages/form.tsx","./src/pages/home.tsx","./src/pages/product.tsx","./src/pages/request-and-load.tsx","./src/pages/settings.tsx"],"errors":true,"version":"5.8.2"}

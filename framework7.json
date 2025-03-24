@@ -1,0 +1,18 @@
+{
+  "cwd": "C:\\Users\\User\\Documents\\ced\\gaming-website",
+  "type": [
+    "pwa"
+  ],
+  "name": "gamingwebsite",
+  "framework": "react",
+  "template": "tabs",
+  "bundler": "vite",
+  "cssPreProcessor": "scss",
+  "theming": {
+    "customColor": false,
+    "color": "#007aff",
+    "darkMode": true,
+    "iconFonts": true
+  },
+  "customBuild": false
+}
