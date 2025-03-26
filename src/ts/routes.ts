@@ -1,97 +1,79 @@
-import HomePage from "../pages/home";
-import AboutPage from "../pages/about";
+import HomePage from "../pages/home/home";
+import AboutPage from "../pages/About";
 import FormPage from "../pages/form";
 import CatalogPage from "../pages/catalog";
+import GamePage from "../pages/game";
 import ProductPage from "../pages/product";
 import SettingsPage from "../pages/settings";
 import DynamicRoutePage from "../pages/dynamic-route";
 import RequestAndLoad from "../pages/request-and-load";
-import NotFoundPage from "../pages/404";
+import NotFoundPage from "../pages/not-found/404";
+import LotteryPage from "../pages/Lottery";
+import SportsPage from "../pages/sports/sports";
+import VideoPage from "../pages/video/video";
+import ElectronicPage from "../pages/electronic/electronic";
+import ChessPage from "../pages/chess/Chess";
+import FishingPage from "../pages/fishing/fishing";
+import OffersPage from "../pages/offers";
+import InformationPage from "../pages/Information";
 
-interface Router {
-  app: {
-    preloader: {
-      show: () => void;
-      hide: () => void;
-    };
-  };
-}
+const routes = [
+  { path: "/", component: HomePage, options: { animate: false } },
 
-interface RouteParams {
-  userId?: string;
-  blogId?: string;
-  postId?: string;
-  id?: string;
-}
+  {
+    path: "/lottery/",
+    component: LotteryPage,
+    options: { animate: false },
+  },
+  {
+    path: "/sports/",
+    component: SportsPage,
+    options: { animate: false },
+  },
+  {
+    path: "/video/",
+    component: VideoPage,
+    options: { animate: false },
+  },
+  {
+    path: "/electronic/",
+    component: ElectronicPage,
+    options: { animate: false },
+  },
+  {
+    path: "/chess/",
+    component: ChessPage,
+    options: { animate: false },
+  },
+  {
+    path: "/fishing/",
+    component: FishingPage,
+    options: { animate: false },
+  },
+  {
+    path: "/offers/",
+    component: OffersPage,
+    options: { animate: false },
+  },
 
-interface RouteProps {
-  user?: User;
-}
-
-interface RouteResolveOptions {
-  component: React.ComponentType<any>;
-  props?: RouteProps;
-}
-
-interface AsyncRouteContext {
-  router: Router;
-  to: {
-    params: RouteParams;
-  };
-  resolve: (
-    route: RouteResolveOptions,
-    options?: { props: RouteProps }
-  ) => void;
-}
-
-interface User {
-  firstName: string;
-  lastName: string;
-  about: string;
-  links: Array<{
-    title: string;
-    url: string;
-  }>;
-}
-
-interface Route {
-  path: string;
-  component?: React.ComponentType<any>;
-  async?: (context: AsyncRouteContext) => void;
-}
-
-const routes: Route[] = [
+  {
+    path: "/information/",
+    component: InformationPage,
+    options: { animate: false },
+  },
+  {
+    path: "/dynamic-route/blog/:blogId/post/:postId/",
+    component: DynamicRoutePage,
+    options: { animate: false },
+  },
+  //mobile
   { path: "/", component: HomePage },
   { path: "/about/", component: AboutPage },
   { path: "/form/", component: FormPage },
   { path: "/catalog/", component: CatalogPage },
   { path: "/product/:id/", component: ProductPage },
   { path: "/settings/", component: SettingsPage },
-  {
-    path: "/dynamic-route/blog/:blogId/post/:postId/",
-    component: DynamicRoutePage,
-  },
-  {
-    path: "/request-and-load/user/:userId/",
-    async: function ({ router, to, resolve }: AsyncRouteContext) {
-      const app = router.app;
-      app.preloader.show();
-      const userId = to.params.userId;
-      setTimeout(function () {
-        const user: User = {
-          firstName: "Vladimir",
-          lastName: "Kharlampidi",
-          about: "Hello, i am creator of Framework7! Hope you like it!",
-          links: [
-            { title: "Framework7 Website", url: "http://framework7.io" },
-            { title: "Framework7 Forum", url: "http://forum.framework7.io" },
-          ],
-        };
-        app.preloader.hide();
-        resolve({ component: RequestAndLoad }, { props: { user: user } });
-      }, 1000);
-    },
-  },
+
   { path: "(.*)", component: NotFoundPage },
 ];
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from "react";
 import {
   Page,
   Navbar,
@@ -10,111 +10,111 @@ import {
   Button,
   Range,
   Block,
-} from 'framework7-react';
+} from "framework7-react";
 
-const SettingsPage = () => (
-  <Page name="settings">
-    <Navbar title="Settings" />
+// Define the types for notification settings
+interface NotificationSettings {
+  email: boolean;
+  push: boolean;
+}
 
-    <BlockTitle>Form Example</BlockTitle>
-    <List strongIos outlineIos dividersIos>
-      <ListInput label="Name" type="text" placeholder="Your name"></ListInput>
+const SettingsPage: React.FC = () => {
+  // Dark mode state
+  const [darkMode, setDarkMode] = useState<boolean>(false);
 
-      <ListInput label="E-mail" type="email" placeholder="E-mail"></ListInput>
+  // Notification settings state
+  const [notifications, setNotifications] = useState<NotificationSettings>({
+    email: true,
+    push: false,
+  });
 
-      <ListInput label="URL" type="url" placeholder="URL"></ListInput>
+  // Handle notification toggle
+  const handleNotificationToggle = (type: keyof NotificationSettings) => {
+    setNotifications((prev) => ({
+      ...prev,
+      [type]: !prev[type],
+    }));
+  };
 
-      <ListInput label="Password" type="password" placeholder="Password"></ListInput>
+  return (
+    <Page name="settings">
+      <Navbar title="Settings" />
 
-      <ListInput label="Phone" type="tel" placeholder="Phone"></ListInput>
+      {/* User Profile Section */}
+      <BlockTitle>User Profile</BlockTitle>
+      <List strongIos outlineIos dividersIos>
+        <ListInput label="Name" type="text" placeholder="Your name" />
+        <ListInput label="E-mail" type="email" placeholder="Your email" />
+        <ListInput label="Phone" type="tel" placeholder="Your phone number" />
+      </List>
 
-      <ListInput label="Gender" type="select">
-        <option>Male</option>
-        <option>Female</option>
-      </ListInput>
+      {/* Preferences Section */}
+      <BlockTitle>Preferences</BlockTitle>
+      <List strongIos outlineIos dividersIos>
+        {/* Dark Mode Toggle */}
+        <ListItem title="Dark Mode">
+          <Toggle
+            slot="after"
+            checked={darkMode}
+            onChange={() => setDarkMode(!darkMode)}
+          />
+        </ListItem>
 
-      <ListInput
-        label="Birth date"
-        type="date"
-        placeholder="Birth day"
-        defaultValue="2014-04-30"
-      ></ListInput>
+        {/* Language Selector */}
+        <ListInput label="Language" type="select">
+          <option>English</option>
+          <option>Spanish</option>
+          <option>French</option>
+          <option>Tagalog</option>
+        </ListInput>
+      </List>
 
-      <ListItem title="Toggle">
-        <Toggle slot="after" />
-      </ListItem>
+      {/* Notifications Section */}
+      <BlockTitle>Notifications</BlockTitle>
+      <List strongIos outlineIos dividersIos>
+        <ListItem title="Email Notifications">
+          <Toggle
+            slot="after"
+            checked={notifications.email}
+            onChange={() => handleNotificationToggle("email")}
+          />
+        </ListItem>
+        <ListItem title="Push Notifications">
+          <Toggle
+            slot="after"
+            checked={notifications.push}
+            onChange={() => handleNotificationToggle("push")}
+          />
+        </ListItem>
+      </List>
 
-      <ListInput label="Range" input={false}>
-        <Range slot="input" value={50} min={0} max={100} step={1} />
-      </ListInput>
+      {/* Security Section */}
+      <BlockTitle>Security</BlockTitle>
+      <List strongIos outlineIos dividersIos>
+        <ListInput
+          label="Change Password"
+          type="password"
+          placeholder="New password"
+        />
+        <ListInput
+          label="Confirm Password"
+          type="password"
+          placeholder="Confirm password"
+        />
+      </List>
 
-      <ListInput type="textarea" label="Textarea" placeholder="Bio"></ListInput>
-      <ListInput type="textarea" label="Resizable" placeholder="Bio" resizable></ListInput>
-    </List>
-
-    <BlockTitle>Buttons</BlockTitle>
-    <Block strongIos outlineIos className="grid grid-cols-2 grid-gap">
-      <Button>Button</Button>
-      <Button fill>Fill</Button>
-
-      <Button raised>Raised</Button>
-      <Button raised fill>
-        Raised Fill
-      </Button>
-
-      <Button round>Round</Button>
-      <Button round fill>
-        Round Fill
-      </Button>
-
-      <Button outline>Outline</Button>
-      <Button round outline>
-        Outline Round
-      </Button>
-
-      <Button small outline>
-        Small
-      </Button>
-      <Button small round outline>
-        Small Round
-      </Button>
-
-      <Button small fill>
-        Small
-      </Button>
-      <Button small round fill>
-        Small Round
-      </Button>
-
-      <Button large raised>
-        Large
-      </Button>
-      <Button large fill raised>
-        Large Fill
-      </Button>
-
-      <Button large fill raised color="red">
-        Large Red
-      </Button>
-      <Button large fill raised color="green">
-        Large Green
-      </Button>
-    </Block>
-
-    <BlockTitle>Checkbox group</BlockTitle>
-    <List strongIos outlineIos dividersIos>
-      <ListItem checkbox name="my-checkbox" value="Books" title="Books"></ListItem>
-      <ListItem checkbox name="my-checkbox" value="Movies" title="Movies"></ListItem>
-      <ListItem checkbox name="my-checkbox" value="Food" title="Food"></ListItem>
-    </List>
-
-    <BlockTitle>Radio buttons group</BlockTitle>
-    <List strongIos outlineIos dividersIos>
-      <ListItem radio name="radio" value="Books" title="Books"></ListItem>
-      <ListItem radio name="radio" value="Movies" title="Movies"></ListItem>
-      <ListItem radio name="radio" value="Food" title="Food"></ListItem>
-    </List>
-  </Page>
-);
+      {/* Buttons Section */}
+      <BlockTitle>Actions</BlockTitle>
+      <Block strongIos outlineIos className="grid grid-cols-2 gap-2">
+        <Button fill large>
+          Save Changes
+        </Button>
+        <Button fill large color="red">
+          Delete Account
+        </Button>
+      </Block>
+    </Page>
+  );
+};
 
 export default SettingsPage;

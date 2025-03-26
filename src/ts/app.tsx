@@ -7,8 +7,8 @@ import Framework7React from "framework7-react";
 
 import "framework7/css/bundle";
 
-import "../css/icons.css";
-import "../css/app.scss";
+import "../assets/css/icons.css";
+import "../assets/css/app.scss";
 
 import App from "../components/app";
 
