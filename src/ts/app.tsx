@@ -11,6 +11,7 @@ import "../assets/css/icons.css";
 import "../assets/css/app.scss";
 
 import App from "../components/app";
+import "../i18n";
 
 Framework7.use(Framework7React);
 

@@ -1,10 +1,7 @@
 import HomePage from "../pages/home/home";
-import AboutPage from "../pages/About";
-import FormPage from "../pages/form";
-import CatalogPage from "../pages/catalog";
+
 import GamePage from "../pages/game";
-import ProductPage from "../pages/product";
-import SettingsPage from "../pages/settings";
+
 import DynamicRoutePage from "../pages/dynamic-route";
 import RequestAndLoad from "../pages/request-and-load";
 import NotFoundPage from "../pages/not-found/404";
@@ -66,13 +63,6 @@ const routes = [
     component: DynamicRoutePage,
     options: { animate: false },
   },
-  //mobile
-  { path: "/", component: HomePage },
-  { path: "/about/", component: AboutPage },
-  { path: "/form/", component: FormPage },
-  { path: "/catalog/", component: CatalogPage },
-  { path: "/product/:id/", component: ProductPage },
-  { path: "/settings/", component: SettingsPage },
 
   { path: "(.*)", component: NotFoundPage },
 ];
