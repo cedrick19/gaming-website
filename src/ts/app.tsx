@@ -22,9 +22,8 @@ if (rootElement) {
 // ✅ Register Service Worker
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => {
-    // If the service worker file is being served from the root, use /service-worker.js
     navigator.serviceWorker
-      .register("/service-worker.js") // or /service-worker.ts if you are compiling ts to js
+      .register("/service-worker.js")
       .then((registration) => {
         console.log(
           "Service Worker registered with scope:",
