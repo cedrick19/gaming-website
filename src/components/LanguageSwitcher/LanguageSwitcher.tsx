@@ -1,3 +1,4 @@
+import { Button } from "framework7-react";
 import React from "react";
 import { useTranslation } from "react-i18next";
 
@@ -10,12 +11,12 @@ const LanguageSwitcher: React.FC = () => {
 
   return (
     <div className="flex space-x-2">
-      <button onClick={() => changeLanguage("en")} className="px-4 py-2 border">
+      <Button onClick={() => changeLanguage("en")} className="px-4 py-2 border">
         🇬🇧 English
-      </button>
-      <button onClick={() => changeLanguage("tl")} className="px-4 py-2 border">
+      </Button>
+      <Button onClick={() => changeLanguage("tl")} className="px-4 py-2 border">
         🇵🇭 Tagalog
-      </button>
+      </Button>
     </div>
   );
 };
