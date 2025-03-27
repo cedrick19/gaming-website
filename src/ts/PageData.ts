@@ -3,6 +3,7 @@ import electronic from "@/pages/electronic/electronic";
 import Fishing from "@/pages/fishing/fishing";
 import HomePage from "@/pages/home/home";
 import Lottery from "@/pages/lottery/Lottery";
+import { GamePage } from "@/pages/lottery/Lottery";
 import Sports from "@/pages/sports/sports";
 import VideoPage from "@/pages/video/video";
 import { ComponentType } from "react";
@@ -58,3 +59,12 @@ export const PageData: PageType[] = [
     component: Fishing,
   },
 ];
+
+export const DynamicPageData:PageType[] = [
+    {
+        id:"game-page",
+        name: "Game",
+        path: "/lottery/:id",
+        component: GamePage
+    }
+]

@@ -5,19 +5,17 @@ import LanguageSwitcher from "../LanguageSwitcher/LanguageSwitcher";
 
 const NavBar = () => {
   const { isLoggedIn } = useAuth();
-  const navigate = (path: string) =>
-    f7.views.main.router.navigate(path, { animate: false });
+  const navigate = (path: string) => f7.views.main.router.navigate(path, { animate: false });
 
   const handleNav = (path: string) => {
-    if (isLoggedIn) {
-      navigate(path);
-    } else {
-      f7.loginScreen.open("#loginHere");
+    if (isLoggedIn) navigate(path);
+    else {
+      f7.loginScreen.open("#loginHere", false);
     }
   };
 
   return (
-    <Navbar className="hidden md:flex md:justify-between">
+    <Navbar className="flex justify-between">
       <NavLeft>
         <span>U8.COM</span>
       </NavLeft>
