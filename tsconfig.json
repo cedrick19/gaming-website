@@ -1,17 +1,20 @@
 {
   "compilerOptions": {
-    "module": "NodeNext",
-    "moduleResolution": "NodeNext",
     "target": "ESNext",
+    "module": "ESNext",
     "jsx": "react-jsx",
     "strict": true,
-    "esModuleInterop": true,
+    "baseUrl": "./",
+    "paths": {
+      "@/*": ["src/*"]
+    },
+    "noUnusedLocals": true,
+    "allowJs": false,
+    "checkJs": false,
     "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true,
-    "allowSyntheticDefaultImports": true,
-    "resolveJsonModule": true,
-    "lib": ["ESNext", "DOM", "WebWorker"]
+    "noImplicitAny": true,
+    "moduleResolution": "bundler",
   },
   "include": ["src"],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules","dist"]
 }

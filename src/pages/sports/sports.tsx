@@ -1,4 +1,3 @@
-import React from "react";
 import { Page, Navbar, Block, List, ListItem, Button } from "framework7-react";
 
 const Sports = () => {
@@ -12,7 +11,7 @@ const Sports = () => {
   return (
     <Page name="sports">
       {/* Navbar */}
-      <Navbar title="🏆 Sports Events" backLink="Back" />
+      <Navbar title="🏆 Sports Events" />
 
       {/* Categories */}
       <Block strong className="text-center">

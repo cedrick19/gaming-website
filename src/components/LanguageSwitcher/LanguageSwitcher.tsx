@@ -1,8 +1,7 @@
 import { Button } from "framework7-react";
-import React from "react";
 import { useTranslation } from "react-i18next";
 
-const LanguageSwitcher: React.FC = () => {
+const LanguageSwitcher:React.FC = () => {
   const { i18n } = useTranslation();
 
   const changeLanguage = (lng: string) => {

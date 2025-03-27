@@ -1,4 +1,3 @@
-import React from "react";
 import { Link } from "framework7-react";
 
 const Header = () => {

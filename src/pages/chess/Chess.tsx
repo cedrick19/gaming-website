@@ -4,7 +4,7 @@ import { Page, Navbar } from "framework7-react";
 const Chess: React.FC = () => {
   return (
     <Page>
-      <Navbar title="This is Chess" />
+      <Navbar title="Chess" />
     </Page>
   );
 };
