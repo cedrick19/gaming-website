@@ -1,7 +1,7 @@
 import React from "react";
 import { Page, Navbar } from "framework7-react";
 
-const electronic: React.FC = () => {
+const Electronic: React.FC = () => {
   return (
     <Page>
       <Navbar title="This is Electronic" />
@@ -9,4 +9,4 @@ const electronic: React.FC = () => {
   );
 };
 
-export default electronic;
+export default Electronic;

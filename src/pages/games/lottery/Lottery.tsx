@@ -1,6 +1,6 @@
 import React from "react";
-import { Page, Navbar, Block, List, ListItem } from "framework7-react";
-import { Router } from "framework7/types";
+import { Page, Navbar, Block, List, ListItem, Link } from "framework7-react";
+import { getDevice, Router } from "framework7/types";
 
 interface DynamicGameRouteProps {
   f7route: Router.Route;
@@ -8,8 +8,11 @@ interface DynamicGameRouteProps {
 }
 
 export const GamePage: React.FC<DynamicGameRouteProps> = (props) => {
-  const {f7route} = props;
+  const {f7route, f7router} = props;
   const gameId = f7route.params.id;
+
+  const goBack = () => f7router.back()
+  const device = getDevice()
 
   return (
     <Page>
@@ -17,6 +20,13 @@ export const GamePage: React.FC<DynamicGameRouteProps> = (props) => {
       <Block strong inset>
         <p>Welcome to {gameId}!</p>
       </Block>
+
+      {device.desktop
+      && (
+        <Block>
+          <Link onClick={goBack} className="text-blue-500">Go back?</Link>
+        </Block>
+      )}
     </Page>
   )
 } 
