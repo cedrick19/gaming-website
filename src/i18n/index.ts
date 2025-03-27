@@ -1,7 +1,9 @@
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
-import en from "../locales/en.json";
-import tl from "../locales/ph.json";
+import en from "../i18n/locales/en.json";
+import tl from "../i18n/locales/ph.json";
+import chs from "../i18n/locales/chs.json";
+import cht from "../i18n/locales/cht.json";
 
 i18n.use(initReactI18next).init({
   resources: {
@@ -10,6 +12,12 @@ i18n.use(initReactI18next).init({
     },
     tl: {
       translation: tl,
+    },
+    chs: {
+      translation: chs,
+    },
+    cht: {
+      translation: cht,
     },
   },
   lng: "en", // Default language

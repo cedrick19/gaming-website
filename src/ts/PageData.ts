@@ -8,53 +8,53 @@ import VideoPage from "@/pages/video/video";
 import { ComponentType } from "react";
 
 interface PageType {
-    id: string;
-    name: string;
-    path: string;
-    component: ComponentType<any>;
+  id: string;
+  name: string;
+  path: string;
+  component: ComponentType<any>;
 }
 
 export const PageData: PageType[] = [
-    {
-        id: "view-home",
-        name: "Home",
-        path: "/",
-        component: HomePage,
-    },
-    {
-        id: "view-lottery",
-        name: "Lottery",
-        path: "/lottery/",
-        component: Lottery,
-    },
-    {
-        id: "view-sports",
-        name: "Sports",
-        path: "/sports/",
-        component: Sports,
-    },
-    {
-        id: "view-video",
-        name: "Video",
-        path: "/video/",
-        component: VideoPage,
-    },
-    {
-        id: "view-electronic",
-        name: "Electronic",
-        path: "/electronic/",
-        component: electronic,
-    },
-    {
-        id: "view-chess",
-        name: "Chess",
-        path: "/chess/",
-        component: Chess
-    },
-    {
-        id: "view-fishing",
-        name: "Fishing",
-        path: "/fishing/",
-        component: Fishing,
-    },
-]
+  {
+    id: "view-home",
+    name: "Home",
+    path: "/",
+    component: HomePage,
+  },
+  {
+    id: "view-lottery",
+    name: "Lottery",
+    path: "/lottery/",
+    component: Lottery,
+  },
+  {
+    id: "view-sports",
+    name: "Sports",
+    path: "/sports/",
+    component: Sports,
+  },
+  {
+    id: "view-video",
+    name: "Video",
+    path: "/video/",
+    component: VideoPage,
+  },
+  {
+    id: "view-electronic",
+    name: "Electronic",
+    path: "/electronic/",
+    component: electronic,
+  },
+  {
+    id: "view-chess",
+    name: "Chess",
+    path: "/chess/",
+    component: Chess,
+  },
+  {
+    id: "view-fishing",
+    name: "Fishing",
+    path: "/fishing/",
+    component: Fishing,
+  },
+];
