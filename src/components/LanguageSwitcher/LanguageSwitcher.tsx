@@ -16,7 +16,7 @@ const LanguageSwitcher: React.FC = () => {
       {/* Dropdown Trigger Button */}
       <Button
         popoverOpen=".language-popover"
-        className="border  w-auto inline-block"
+        className="inline-block w-auto border"
         onClick={() => setPopoverOpened(true)} // Open when clicked
       >
         🌐 Select Language

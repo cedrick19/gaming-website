@@ -15,7 +15,7 @@ interface PageType {
   name: string;
   path: string;
   component: ComponentType<any>;
-  category?: "games" | "default"
+  category?: "games" | "default";
 }
 
 export const PageData: PageType[] = [
@@ -89,7 +89,7 @@ export const PageData: PageType[] = [
     component: ProfilePage,
     category: "default",
   },
-]
+];
 
 export const DynamicPageData: PageType[] = [
   {
@@ -98,4 +98,4 @@ export const DynamicPageData: PageType[] = [
     path: "/lottery/:id",
     component: GamePage,
   },
-]
+];

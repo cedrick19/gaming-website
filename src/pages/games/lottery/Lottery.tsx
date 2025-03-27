@@ -8,11 +8,11 @@ interface DynamicGameRouteProps {
 }
 
 export const GamePage: React.FC<DynamicGameRouteProps> = (props) => {
-  const {f7route, f7router} = props;
+  const { f7route, f7router } = props;
   const gameId = f7route.params.id;
 
-  const goBack = () => f7router.back()
-  const device = getDevice()
+  const goBack = () => f7router.back();
+  const device = getDevice();
 
   return (
     <Page>
@@ -21,24 +21,26 @@ export const GamePage: React.FC<DynamicGameRouteProps> = (props) => {
         <p>Welcome to {gameId}!</p>
       </Block>
 
-      {device.desktop
-      && (
+      {device.desktop && (
         <Block>
-          <Link onClick={goBack} className="text-blue-500">Go back?</Link>
+          <Link onClick={goBack} className="text-blue-500">
+            Go back?
+          </Link>
         </Block>
       )}
     </Page>
-  )
-} 
+  );
+};
 
 const Lottery: React.FC = () => {
   const gameSampleArray = ["Starship Fighters", "Sports Betting", "Poker"];
 
   return (
     <Page name="lottery">
-      <Navbar title="Lottery" className="flex md:hidden"/>
+      <Navbar title="Lottery" className="flex md:hidden" />
       <Block>
-        This is a test page for lottery to test out dynamic routing! Feel free to access these sites:
+        This is a test page for lottery to test out dynamic routing! Feel free
+        to access these sites:
       </Block>
       <List>
         {gameSampleArray.map((game, index) => (

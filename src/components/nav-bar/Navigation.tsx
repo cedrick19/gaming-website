@@ -1,12 +1,21 @@
 import { PageData } from "@/ts/PageData";
-import { f7, Link, NavLeft, NavRight, Toolbar, View, Views } from "framework7-react";
+import {
+  f7,
+  Link,
+  NavLeft,
+  NavRight,
+  Toolbar,
+  View,
+  Views,
+} from "framework7-react";
 import { useAuth } from "../AuthContext";
 import { getDevice } from "framework7";
 import LanguageSwitcher from "../LanguageSwitcher/LanguageSwitcher";
 
 const NavLinks = ({ isMobile }: { isMobile: boolean }) => {
   const { isLoggedIn } = useAuth();
-  const navigate = (path: string) => f7.views.main.router.navigate(path, { animate: false });
+  const navigate = (path: string) =>
+    f7.views.main.router.navigate(path, { animate: false });
 
   const handleNav = (path: string) => {
     if (isLoggedIn) navigate(path);
@@ -17,45 +26,44 @@ const NavLinks = ({ isMobile }: { isMobile: boolean }) => {
 
   return (
     <>
-      {isMobile
-      ? (
-      <>
-        {PageData.filter((page) => page.category === "default")
-          .map(({ id, name, path }, index) => (
-          <Link
-            key={index}
-            text={name}
-            tabLink={`#${id}`}
-            tabLinkActive={id === "view-home"}
-            onClick={() => handleNav(path)}
-          />
-        ))}
-      </>
-      )
-      : (
-      <>
-        <NavLeft>
-          <span>U8.COM</span>
-        </NavLeft>
-        {PageData.filter((page) => page.name !== "Games")
-          .map(({ id, name, path }, index) => (
-          <Link
-            key={index}
-            text={name}
-            tabLink={`#${id}`}
-            tabLinkActive={id === "view-home"}
-            onClick={() => handleNav(path)}
-          />
-        ))}
-        <NavRight>
-          <LanguageSwitcher />
-        </NavRight>
-      </>
+      {isMobile ? (
+        <>
+          {PageData.filter((page) => page.category === "default").map(
+            ({ id, name, path }, index) => (
+              <Link
+                key={index}
+                text={name}
+                tabLink={`#${id}`}
+                tabLinkActive={id === "view-home"}
+                onClick={() => handleNav(path)}
+              />
+            ),
+          )}
+        </>
+      ) : (
+        <>
+          <NavLeft>
+            <span>U8.COM</span>
+          </NavLeft>
+          {PageData.filter((page) => page.name !== "Games").map(
+            ({ id, name, path }, index) => (
+              <Link
+                key={index}
+                text={name}
+                tabLink={`#${id}`}
+                tabLinkActive={id === "view-home"}
+                onClick={() => handleNav(path)}
+              />
+            ),
+          )}
+          <NavRight>
+            <LanguageSwitcher />
+          </NavRight>
+        </>
       )}
-      
     </>
-  )
-}
+  );
+};
 
 const NavBar = () => {
   const isMobile = getDevice().android || getDevice().ios;
@@ -63,10 +71,10 @@ const NavBar = () => {
   return (
     <Views tabs>
       <Toolbar tabbar icons outline={false} bottom={isMobile}>
-        <NavLinks isMobile={isMobile}/>
+        <NavLinks isMobile={isMobile} />
       </Toolbar>
 
-      {PageData.map(({ id, name, path }, index ) => (
+      {PageData.map(({ id, name, path }, index) => (
         <View
           key={index}
           id={id}

@@ -1,5 +1,5 @@
-import { CustomModal } from '@/components/CustomModal';
-import { useAuth } from '@/components/AuthContext';
+import { CustomModal } from "@/components/CustomModal";
+import { useAuth } from "@/components/AuthContext";
 import {
   Page,
   Navbar,
@@ -12,17 +12,17 @@ import {
   Range,
   Block,
   f7,
-} from 'framework7-react';
+} from "framework7-react";
 
 const ProfilePage = () => {
-  const {logout} = useAuth();
-  const navigate = (path:string) => f7.tab.show(path)
+  const { logout } = useAuth();
+  const navigate = (path: string) => f7.tab.show(path);
 
   const handleLogout = () => {
     f7.popup.close("#logoutConfirm");
     navigate("#view-home");
     logout();
-  }
+  };
 
   return (
     <Page name="settings">
@@ -36,7 +36,11 @@ const ProfilePage = () => {
 
         <ListInput label="URL" type="url" placeholder="URL"></ListInput>
 
-        <ListInput label="Password" type="password" placeholder="Password"></ListInput>
+        <ListInput
+          label="Password"
+          type="password"
+          placeholder="Password"
+        ></ListInput>
 
         <ListInput label="Phone" type="tel" placeholder="Phone"></ListInput>
 
@@ -60,25 +64,31 @@ const ProfilePage = () => {
           <Range slot="input" value={50} min={0} max={100} step={1} />
         </ListInput>
 
-        <ListInput type="textarea" label="Textarea" placeholder="Bio"></ListInput>
-        <ListInput type="textarea" label="Resizable" placeholder="Bio" resizable></ListInput>
+        <ListInput
+          type="textarea"
+          label="Textarea"
+          placeholder="Bio"
+        ></ListInput>
+        <ListInput
+          type="textarea"
+          label="Resizable"
+          placeholder="Bio"
+          resizable
+        ></ListInput>
       </List>
       <Button onClick={() => f7.popup.open("#logoutConfirm")}>Log out</Button>
 
       <CustomModal id="logoutConfirm">
         <p>Are you sure you want to log out?</p>
-        <Block className="grid grid-cols-2 grid-gap">
+        <Block className="grid-gap grid grid-cols-2">
           <Button popupClose="#logoutConfirm">Cancel</Button>
-          <Button
-            fill
-            onClick={handleLogout}
-          >
+          <Button fill onClick={handleLogout}>
             Log out
           </Button>
         </Block>
       </CustomModal>
     </Page>
-  )
+  );
 };
 
 export default ProfilePage;

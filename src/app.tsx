@@ -6,11 +6,7 @@ import { AuthProvider } from "./components/AuthContext";
 const MyApp = () => {
   return (
     <AuthProvider>
-      <App
-        name="gamingwebsite"
-        theme="auto"
-        routes={routes}
-      >
+      <App name="gamingwebsite" theme="auto" routes={routes}>
         <NavBar />
         <View main tab url="/" browserHistory browserHistorySeparator="" />
       </App>
