@@ -1,18 +1,12 @@
 import React from "react";
-import { Page } from "framework7-react";
-import { useTranslation } from "react-i18next";
+import { Page, Navbar } from "framework7-react";
 
-const Fishing: React.FC = () => {
-  const { t } = useTranslation();
-
+const Electronic: React.FC = () => {
   return (
     <Page>
-      <div>
-        <h1 className="text-3xl font-bold">{t("title")}</h1>
-        <p className="text-gray-600">{t("description")}</p>
-      </div>
+      <Navbar title="Fishing" />
     </Page>
   );
 };
 
-export default Fishing;
+export default Electronic;
