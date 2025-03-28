@@ -8,8 +8,7 @@
   "scripts": {
     "start": "npm run dev",
     "dev": "cross-env NODE_ENV=development vite",
-    "build": "cross-env NODE_ENV=production vite build && npx workbox generateSW workbox-config.js",
-    "postinstall": "cpy --flat ./node_modules/framework7-icons/fonts/*.* ./src/assets/fonts/ && cpy --flat ./node_modules/material-icons/iconfont/*.* ./src/assets/fonts/"
+    "build": "cross-env NODE_ENV=production vite build && npx workbox generateSW workbox-config.js"
   },
   "browserslist": [
     "IOS >= 15",
@@ -51,5 +50,8 @@
     "typescript": "^5.8.2",
     "vite": "^6.2.2",
     "workbox-cli": "^7.3.0"
+  },
+  "framework7": {
+    "noInstall": true
   }
 }
