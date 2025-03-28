@@ -13,6 +13,7 @@ import {
   Block,
   f7,
 } from "framework7-react";
+import Layout from "@/layout/layout";
 
 const ProfilePage = () => {
   const { logout } = useAuth();
@@ -25,68 +26,62 @@ const ProfilePage = () => {
   };
 
   return (
-    <Page name="User Profile">
-      <Navbar title="User Profile" />
+    <Page name="settings">
+      <Layout>
+        <Navbar title="Settings" />
+        <BlockTitle>Form Example</BlockTitle>
+        <List strongIos outlineIos dividersIos>
+          <ListInput label="Name" type="text" placeholder="Your name" />
 
-      <BlockTitle>Form Example</BlockTitle>
-      <List strongIos outlineIos dividersIos>
-        <ListInput label="Name" type="text" placeholder="Your name"></ListInput>
+          <ListInput label="E-mail" type="email" placeholder="E-mail" />
 
-        <ListInput label="E-mail" type="email" placeholder="E-mail"></ListInput>
+          <ListInput label="URL" type="url" placeholder="URL" />
 
-        <ListInput label="URL" type="url" placeholder="URL"></ListInput>
+          <ListInput label="Password" type="password" placeholder="Password" />
 
-        <ListInput
-          label="Password"
-          type="password"
-          placeholder="Password"
-        ></ListInput>
+          <ListInput label="Phone" type="tel" placeholder="Phone" />
 
-        <ListInput label="Phone" type="tel" placeholder="Phone"></ListInput>
+          <ListInput label="Gender" type="select">
+            <option>Male</option>
+            <option>Female</option>
+          </ListInput>
 
-        <ListInput label="Gender" type="select">
-          <option>Male</option>
-          <option>Female</option>
-        </ListInput>
+          <ListInput
+            label="Birth date"
+            type="date"
+            placeholder="Birth day"
+            defaultValue="2014-04-30"
+          />
 
-        <ListInput
-          label="Birth date"
-          type="date"
-          placeholder="Birth day"
-          defaultValue="2014-04-30"
-        ></ListInput>
+          <ListItem title="Toggle">
+            <Toggle slot="after" />
+          </ListItem>
 
-        <ListItem title="Toggle">
-          <Toggle slot="after" />
-        </ListItem>
+          <ListInput label="Range" input={false}>
+            <Range slot="input" value={50} min={0} max={100} step={1} />
+          </ListInput>
 
-        <ListInput label="Range" input={false}>
-          <Range slot="input" value={50} min={0} max={100} step={1} />
-        </ListInput>
+          <ListInput type="textarea" label="Textarea" placeholder="Bio" />
+          <ListInput
+            type="textarea"
+            label="Resizable"
+            placeholder="Bio"
+            resizable
+          />
+        </List>
 
-        <ListInput
-          type="textarea"
-          label="Textarea"
-          placeholder="Bio"
-        ></ListInput>
-        <ListInput
-          type="textarea"
-          label="Resizable"
-          placeholder="Bio"
-          resizable
-        ></ListInput>
-      </List>
-      <Button onClick={() => f7.popup.open("#logoutConfirm")}>Log out</Button>
+        <Button onClick={() => f7.popup.open("#logoutConfirm")}>Log out</Button>
 
-      <CustomModal id="logoutConfirm">
-        <p>Are you sure you want to log out?</p>
-        <Block className="grid-gap grid grid-cols-2">
-          <Button popupClose="#logoutConfirm">Cancel</Button>
-          <Button fill onClick={handleLogout}>
-            Log out
-          </Button>
-        </Block>
-      </CustomModal>
+        <CustomModal id="logoutConfirm">
+          <p>Are you sure you want to log out?</p>
+          <Block className="grid-gap grid grid-cols-2">
+            <Button popupClose="#logoutConfirm">Cancel</Button>
+            <Button fill onClick={handleLogout}>
+              Log out
+            </Button>
+          </Block>
+        </CustomModal>
+      </Layout>
     </Page>
   );
 };

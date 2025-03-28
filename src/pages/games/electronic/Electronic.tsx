@@ -1,10 +1,14 @@
 import React from "react";
 import { Page, Navbar } from "framework7-react";
+import Layout from "@/layout/layout";
 
 const Electronic: React.FC = () => {
   return (
     <Page>
-      <Navbar title="This is Electronic" />
+      <Layout>
+        <Navbar title="This is Electronic" />
+        <p className="text-center">Welcome to the Electronic page!</p>
+      </Layout>
     </Page>
   );
 };
