@@ -6,9 +6,12 @@ module.exports = {
   ],
   theme: {
     extend: {
-      "colors": {
+      colors: {
         "primary": "#A03D8C",
         "secondary": "#4C2CCA"
+      },
+      fontFamily : {
+        sans: ["Nunito", "sans-serif"],
       }
     },
   },

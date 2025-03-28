@@ -69,12 +69,12 @@ const NavLinks = ({ isMobile }: { isMobile?: boolean }) => {
               <span className="text-xl font-bold text-transparent bg-gradient-to-r from-primary to-secondary bg-clip-text">
                 U8.COM
               </span>
-              <span className="text-xs text-black">Chinese Gaming</span>
+              <span className="text-xs text-black font-light">Chinese Gaming</span>
             </Link>
 
             <Link
               href="#"
-              className="ml-4 flex items-center text-blue-500 no-underline"
+              className="flex items-center text-blue-500 no-underline"
             >
               <Icon f7="logo_telegram" className="text-blue-500" />
               <span className="ml-1 text-xs">@t.u8Support</span>
@@ -82,7 +82,7 @@ const NavLinks = ({ isMobile }: { isMobile?: boolean }) => {
           </Block>
 
           <Block className="flex justify-center" style={{ width: "60%" }}>
-            <Block className="flex space-x-6 text-xs font-medium">
+            <Block className="flex space-x-6 text-xs">
               {PageData.filter(
                 (page) => page.name !== "Games" && page.name !== "Profile",
               ).map(({ id, name, path }, index) => (
@@ -91,10 +91,10 @@ const NavLinks = ({ isMobile }: { isMobile?: boolean }) => {
                   tabLink={`#${id}`}
                   tabLinkActive={activeTabId === id}
                   onClick={() => handleNav(path, id)}
-                  className={`whitespace-nowrap px-1 no-underline ${
+                  className={`whitespace-nowrap no-underline ${
                     activeTabId === id
-                      ? "font-bold text-transparent bg-gradient-to-r from-primary to-secondary bg-clip-text"
-                      : "text-gray-700"
+                      ? "font-black text-transparent bg-gradient-to-r from-primary to-secondary bg-clip-text"
+                      : "font-semibold text-gray-700"
                   }`}
                 >
                   {name.toUpperCase()}
@@ -164,7 +164,7 @@ const NavBar = () => {
           <NavLinks isMobile={isMobile} />
         </Toolbar>
       ) : (
-        <Block className="container mx-auto flex h-8 w-full items-center">
+        <Block className="container mx-auto flex h-8 w-full items-center justify-between">
           <NavLinks />
         </Block>
       )}
