@@ -3,10 +3,16 @@ import routes from "./ts/routes";
 import NavBar from "./components/nav-bar/Navigation";
 import { AuthProvider } from "./components/AuthContext";
 
-const MyApp = () => {
+const appConfig = {
+  name: "gamingwebsite",
+  theme: "auto",
+  routes,
+};
+
+const MyApp: React.FC = () => {
   return (
     <AuthProvider>
-      <App name="gamingwebsite" theme="auto" routes={routes}>
+      <App {...appConfig}>
         <NavBar />
         <View main tab url="/" browserHistory browserHistorySeparator="" />
       </App>

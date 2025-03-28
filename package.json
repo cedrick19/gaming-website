@@ -24,6 +24,7 @@
     "framework7-icons": "^5.0.5",
     "framework7-react": "^8.3.4",
     "i18next": "^24.2.3",
+    "i18next-browser-languagedetector": "^8.0.4",
     "material-icons": "^1.13.14",
     "prop-types": "^15.8.1",
     "react": "^19.0.0",

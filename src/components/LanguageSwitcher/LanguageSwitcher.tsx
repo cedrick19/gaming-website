@@ -6,23 +6,34 @@ const LanguageSwitcher: React.FC = () => {
   const { i18n } = useTranslation();
   const [popoverOpened, setPopoverOpened] = useState(false);
 
-  const changeLanguage = (lng: string) => {
-    i18n.changeLanguage(lng);
-    setPopoverOpened(false); // Close dropdown after selection
+  const changeLanguage = async (lng: string) => {
+    try {
+      const translation = await import(`@/i18n/locales/${lng}.json`);
+      i18n.addResourceBundle(
+        lng,
+        "translation",
+        translation.default,
+        true,
+        true,
+      );
+      i18n.changeLanguage(lng);
+    } catch (error) {
+      console.error(`Error loading ${lng} translation:`, error);
+    }
+
+    setPopoverOpened(false);
   };
 
   return (
     <div className="relative">
-      {/* Dropdown Trigger Button */}
       <Button
         popoverOpen=".language-popover"
         className="inline-block w-auto border"
-        onClick={() => setPopoverOpened(true)} // Open when clicked
+        onClick={() => setPopoverOpened(true)}
       >
         🌐 Select Language
       </Button>
 
-      {/* Dropdown List (Popover) */}
       <Popover
         className="language-popover"
         opened={popoverOpened}
@@ -38,7 +49,7 @@ const LanguageSwitcher: React.FC = () => {
           <ListItem
             link="#"
             title="🇵🇭 Tagalog"
-            onClick={() => changeLanguage("tl")}
+            onClick={() => changeLanguage("ph")}
           />
           <ListItem
             link="#"
