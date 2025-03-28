@@ -1,6 +1,7 @@
 import React from "react";
 import { Page, Navbar, Block, List, ListItem } from "framework7-react";
 import { Router } from "framework7/types";
+import { PageContainer } from "@/components/PageContainer";
 
 interface DynamicGameRouteProps {
   f7route: Router.Route;
@@ -27,19 +28,21 @@ const Lottery: React.FC = () => {
   return (
     <Page name="lottery">
       <Navbar title="Lottery" className="flex md:hidden" backLink={"Back"}/>
-      <Block>
-        This is a test page for lottery to test out dynamic routing! Feel free
-        to access these sites:
-      </Block>
-      <List>
-        {gameSampleArray.map((game, index) => (
-          <ListItem
-            key={index}
-            title={`Play ${game}`}
-            link={`/lottery/${game}`}
-          />
-        ))}
-      </List>
+      <PageContainer>
+        <Block>
+          This is a test page for lottery to test out dynamic routing! Feel free
+          to access these sites:
+        </Block>
+        <List>
+          {gameSampleArray.map((game, index) => (
+            <ListItem
+              key={index}
+              title={`Play ${game}`}
+              link={`/lottery/${game}`}
+            />
+          ))}
+        </List>
+      </PageContainer>
     </Page>
   );
 };

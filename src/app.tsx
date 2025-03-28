@@ -1,7 +1,7 @@
 import { App, View } from "framework7-react";
 import routes from "./ts/routes";
-import NavBar from "./components/nav-bar/Navigation";
 import { AuthProvider } from "./components/AuthContext";
+import { NavBar } from "./components/nav-bar";
 
 const appConfig = {
   name: "gamingwebsite",

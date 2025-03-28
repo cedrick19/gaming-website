@@ -1,12 +1,13 @@
-import { Page, Navbar, Block } from "framework7-react";
+import { PageContainer } from "@/components/PageContainer";
+import { Page, Navbar } from "framework7-react";
 
 const NotFoundPage = () => (
   <Page>
     <Navbar title="Not found" backLink="Back" />
-    <Block strong inset>
+    <PageContainer>
       <p>Sorry</p>
       <p>Requested content not found.</p>
-    </Block>
+    </PageContainer>
   </Page>
 );
 
