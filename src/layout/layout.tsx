@@ -1,11 +1,13 @@
+import { Block } from "framework7-react";
 import { ReactNode } from "react";
 
 interface LayoutProps {
+  style?: string
   children: ReactNode;
 }
 
-const Layout = ({ children }: LayoutProps) => {
-  return <div className="container mx-auto">{children}</div>;
+const Layout = ({ style, children }: LayoutProps) => {
+  return <Block className={`${style} container mx-auto`}>{children}</Block>;
 };
 
 export default Layout;

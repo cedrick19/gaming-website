@@ -1,4 +1,4 @@
-import { Page } from "framework7-react";
+import { Block, Page } from "framework7-react";
 import { useTranslation } from "react-i18next";
 
 import { LoginModal } from "@/components/LoginModal";
@@ -36,11 +36,11 @@ const HomePage = () => {
         </SwiperSlide>
       </Swiper>
       <Layout>
-        <div className="container mx-auto"></div>
-        <div>
+        this is home
+        <Block>
           <h1 className="text-3xl font-bold">{t("title")}</h1>
           <p className="text-gray-600">{t("description")}</p>
-        </div>
+        </Block>
       </Layout>
       <LoginModal />
     </Page>
