@@ -3,9 +3,9 @@ import {
   List,
   ListButton,
   ListInput,
+  LoginScreen,
   LoginScreenTitle,
   Page,
-  Popup,
   View,
 } from "framework7-react";
 import { useState } from "react";
@@ -18,10 +18,10 @@ export const LoginModal = () => {
 
   const handleLogin = () => {
     login();
-    f7.popup.close("#loginHere", false);
+    f7.loginScreen.close();
   };
   return (
-    <Popup id="loginHere">
+    <LoginScreen id="loginHere">
       <View>
         <Page loginScreen>
           <LoginScreenTitle>Login</LoginScreenTitle>
@@ -46,6 +46,6 @@ export const LoginModal = () => {
           </List>
         </Page>
       </View>
-    </Popup>
+    </LoginScreen>
   );
 };

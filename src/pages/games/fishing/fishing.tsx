@@ -1,12 +1,16 @@
 import React from "react";
 import { Page, Navbar } from "framework7-react";
+import Layout from "@/layout/layout";
 
-const Electronic: React.FC = () => {
+const Fishing: React.FC = () => {
   return (
     <Page>
-      <Navbar title="Fishing" />
+      <Layout>
+        <Navbar title="This is fishing" />
+        <p className="text-center">Welcome to the Fishing page!</p>
+      </Layout>
     </Page>
   );
 };
 
-export default Electronic;
+export default Fishing;

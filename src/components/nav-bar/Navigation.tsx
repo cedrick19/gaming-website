@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { PageData } from "@/ts/PageData";
-import { f7, Link, Icon, View, Views, Toolbar, Block } from "framework7-react";
+import { f7, Link, Icon, View, Views, Toolbar } from "framework7-react";
 import { useAuth } from "../AuthContext";
 import { getDevice } from "framework7";
 import LanguageSwitcher from "../LanguageSwitcher/LanguageSwitcher";
@@ -50,27 +50,30 @@ const NavLinks = ({ isMobile }: { isMobile?: boolean }) => {
                 tabLink={`#${id}`}
                 tabLinkActive={id === activeTabId}
                 onClick={() => handleNav(path, id)}
-                className={
-                  `whitespace-nowrap text-xs ${
-                  id === activeTabId 
-                  ? "font-bold text-transparent bg-gradient-to-r from-primary to-secondary bg-clip-text" 
-                  : ""}`}
+                className={`whitespace-nowrap text-xs ${id === activeTabId ? "font-bold text-purple-700" : ""}`}
               />
             ),
           )}
         </>
       ) : (
-        <>
-          <Block className="flex flex-row">
+        <div className="container mx-auto flex w-full items-center px-4">
+          <div
+            className="mr-4 flex shrink-0 items-center"
+            style={{ width: "15%" }}
+          >
             <Link
               className="flex flex-col items-center no-underline"
               href="/"
               onClick={() => setActiveTabId("view-home")}
             >
-              <span className="text-xl font-bold text-purple-600">
-                U8.COM
-              </span>
-              <span className="text-xs text-black">Chinese Gaming</span>
+              <div className="flex items-center">
+                <span className="text-xl font-bold text-purple-600">
+                  U8.COM
+                </span>
+              </div>
+              <div className="flex">
+                <span className="text-xs text-black">Chinese Gaming</span>
+              </div>
             </Link>
 
             <Link
@@ -80,44 +83,48 @@ const NavLinks = ({ isMobile }: { isMobile?: boolean }) => {
               <Icon f7="logo_telegram" className="text-blue-500" />
               <span className="ml-1 text-xs">@t.u8Support</span>
             </Link>
-          </Block>
+          </div>
 
-          <Block className="flex flex-1 justify-center space-x-6 text-xs font-medium">
-            {PageData.filter((page) => page.name !== "Games" && page.name !== "Profile",).map(({ id, name, path }, index) => (
-              <Link
-                key={index}
-                tabLink={`#${id}`}
-                tabLinkActive={activeTabId === id}
-                onClick={() => handleNav(path, id)}
-                className={`whitespace-nowrap px-1 no-underline ${
-                  activeTabId === id
-                    ? "font-bold text-transparent bg-gradient-to-r from-primary to-secondary bg-clip-text"
-                    : "text-gray-700"
-                }`}
-              >
-                {name.toUpperCase()}
-              </Link>
-            ))}
-          </Block>
+          <div className="flex justify-center" style={{ width: "60%" }}>
+            <div className="flex space-x-6 text-xs font-medium">
+              {PageData.filter(
+                (page) => page.name !== "Games" && page.name !== "Profile",
+              ).map(({ id, name, path }, index) => (
+                <Link
+                  key={index}
+                  tabLink={`#${id}`}
+                  tabLinkActive={activeTabId === id}
+                  onClick={() => handleNav(path, id)}
+                  className={`whitespace-nowrap px-1 no-underline ${
+                    activeTabId === id
+                      ? "font-bold text-purple-700"
+                      : "text-gray-700"
+                  }`}
+                >
+                  {name.toUpperCase()}
+                </Link>
+              ))}
+            </div>
+          </div>
 
-          <Block className="flex shrink-0 items-center justify-end space-x-3">
-            <Block className="flex flex-col">
-              <Link href="#" className="flex flex-col items-center no-underline">
-                <Icon
-                  f7="arrow_down_circle"
-                  className="text-xl text-transparent bg-gradient-to-r from-primary to-secondary bg-clip-text"
-                />
-                <span className="text-xs text-gray-600">DOWNLOAD</span>
-              </Link>
-              <Link href="#" className="flex flex-col items-center no-underline">
-                <Icon f7="bell" className="text-xl text-transparent bg-gradient-to-r from-primary to-secondary bg-clip-text" />
-                <span className="text-xs text-gray-600">NEWS</span>
-              </Link>
-            </Block>
-            
+          <div
+            className="flex shrink-0 items-center justify-end space-x-3"
+            style={{ width: "25%" }}
+          >
+            <Link href="#" className="flex flex-col items-center no-underline">
+              <Icon
+                f7="arrow_down_circle"
+                className="text-xl text-purple-600"
+              />
+              <span className="text-xs text-gray-600">DOWNLOAD</span>
+            </Link>
+            <Link href="#" className="flex flex-col items-center no-underline">
+              <Icon f7="bell" className="text-xl text-purple-600" />
+              <span className="text-xs text-gray-600">NEWS</span>
+            </Link>
             <Link
               href="#"
-              className="flex items-center rounded-md bg-gradient-to-r from-primary to-secondary px-3 py-1 text-white no-underline"
+              className="flex items-center rounded-md bg-purple-600 px-3 py-1 text-white no-underline"
             >
               <span className="mr-1">+</span>
               <span>FILL</span>
@@ -136,21 +143,21 @@ const NavLinks = ({ isMobile }: { isMobile?: boolean }) => {
                 alt="User"
                 className="h-7 w-7 rounded-full"
               />
-              <Block className="ml-1">
-                <p className="text-xs text-gray-600">level 1</p>
-                <p className="text-xs font-bold">0.0</p>
-              </Block>
+              <div className="ml-1">
+                <div className="text-xs text-gray-600">level 1</div>
+                <div className="text-xs font-bold">0.0</div>
+              </div>
             </Link>
 
             <LanguageSwitcher />
-          </Block>
-        </>
+          </div>
+        </div>
       )}
     </>
   );
 };
 
-export const NavBar = () => {
+const NavBar = () => {
   const isMobile = getDevice().android || getDevice().ios;
 
   return (
@@ -160,9 +167,9 @@ export const NavBar = () => {
           <NavLinks isMobile={isMobile} />
         </Toolbar>
       ) : (
-        <Block className="container mx-auto flex h-4 w-full items-center px-4">
+        <div className="flex h-16 w-full items-center border-b border-gray-200">
           <NavLinks />
-        </Block>
+        </div>
       )}
 
       {PageData.map(({ id, name, path }, index) => (
@@ -179,3 +186,5 @@ export const NavBar = () => {
     </Views>
   );
 };
+
+export default NavBar;
