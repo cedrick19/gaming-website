@@ -77,7 +77,7 @@ export const PageData: PageType[] = [
   },
   {
     id: "view-activity",
-    name: "Activity",
+    name: "Preferential Activities",
     path: "/activity/",
     component: ActivityPage,
     category: "default",

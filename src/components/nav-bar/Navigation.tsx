@@ -5,7 +5,7 @@ import { useAuth } from "../AuthContext";
 import { getDevice } from "framework7";
 import LanguageSwitcher from "../LanguageSwitcher/LanguageSwitcher";
 
-const NavLinks = ({ isMobile }: { isMobile: boolean }) => {
+const NavLinks = ({ isMobile }: { isMobile?: boolean }) => {
   const { isLoggedIn } = useAuth();
   const navigate = (path: string) =>
     f7.views.main.router.navigate(path, { animate: false });
@@ -46,7 +46,7 @@ const NavLinks = ({ isMobile }: { isMobile: boolean }) => {
             ({ id, name, path }, index) => (
               <Link
                 key={index}
-                text={name}
+                text={id === "view-activity" ? "Activity" : name}
                 tabLink={`#${id}`}
                 tabLinkActive={id === activeTabId}
                 onClick={() => handleNav(path, id)}
@@ -86,21 +86,8 @@ const NavLinks = ({ isMobile }: { isMobile: boolean }) => {
           </div>
 
           <div className="flex justify-center" style={{ width: "60%" }}>
-            <div className="flex space-x-6 text-xs font-medium uppercase">
-              <Link
-                tabLink="#view-home"
-                tabLinkActive={activeTabId === "view-home"}
-                onClick={() => handleNav("/", "view-home")}
-                className={`whitespace-nowrap px-1 no-underline ${
-                  activeTabId === "view-home"
-                    ? "font-bold text-purple-700"
-                    : "text-gray-700"
-                }`}
-              >
-                HOMEPAGE
-              </Link>
-
-              {PageData.filter((page) => page.category === "games").map(
+            <div className="flex space-x-6 text-xs font-medium">
+              {PageData.filter((page) => page.name !== "Games" && page.name !== "Profile").map(
                 ({ id, name, path }, index) => (
                   <Link
                     key={index}
@@ -117,19 +104,6 @@ const NavLinks = ({ isMobile }: { isMobile: boolean }) => {
                   </Link>
                 ),
               )}
-
-              <Link
-                tabLink="#view-activity"
-                tabLinkActive={activeTabId === "view-activity"}
-                onClick={() => handleNav("/activity/", "view-activity")}
-                className={`whitespace-nowrap px-1 no-underline ${
-                  activeTabId === "view-activity"
-                    ? "font-bold text-purple-700"
-                    : "text-gray-700"
-                }`}
-              >
-                PREFERENTIAL ACTIVITIES
-              </Link>
             </div>
           </div>
 
@@ -157,7 +131,6 @@ const NavLinks = ({ isMobile }: { isMobile: boolean }) => {
             </Link>
             <Link
               tabLink="#view-profile"
-              tabLinkActive={activeTabId === "view-profile"}
               onClick={() => handleNav(profilePath, "view-profile")}
               className={`flex items-center no-underline ${
                 activeTabId === "view-profile"
@@ -190,12 +163,12 @@ const NavBar = () => {
   return (
     <Views tabs className="bg-white shadow-sm">
       {isMobile ? (
-        <Toolbar tabbar icons outline={false} bottom={true}>
-          <NavLinks isMobile={true} />
+        <Toolbar tabbar icons outline={false} bottom={isMobile}>
+          <NavLinks isMobile={isMobile} />
         </Toolbar>
       ) : (
         <div className="flex h-16 w-full items-center border-b border-gray-200">
-          <NavLinks isMobile={false} />
+          <NavLinks />
         </div>
       )}
 
