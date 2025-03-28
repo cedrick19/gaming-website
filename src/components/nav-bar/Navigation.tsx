@@ -56,7 +56,7 @@ const NavLinks = ({ isMobile }: { isMobile?: boolean }) => {
           )}
         </>
       ) : (
-        <div className="flex w-full items-center px-4">
+        <div className="container mx-auto flex w-full items-center px-4">
           <div
             className="mr-4 flex shrink-0 items-center"
             style={{ width: "15%" }}
@@ -87,23 +87,23 @@ const NavLinks = ({ isMobile }: { isMobile?: boolean }) => {
 
           <div className="flex justify-center" style={{ width: "60%" }}>
             <div className="flex space-x-6 text-xs font-medium">
-              {PageData.filter((page) => page.name !== "Games" && page.name !== "Profile").map(
-                ({ id, name, path }, index) => (
-                  <Link
-                    key={index}
-                    tabLink={`#${id}`}
-                    tabLinkActive={activeTabId === id}
-                    onClick={() => handleNav(path, id)}
-                    className={`whitespace-nowrap px-1 no-underline ${
-                      activeTabId === id
-                        ? "font-bold text-purple-700"
-                        : "text-gray-700"
-                    }`}
-                  >
-                    {name.toUpperCase()}
-                  </Link>
-                ),
-              )}
+              {PageData.filter(
+                (page) => page.name !== "Games" && page.name !== "Profile",
+              ).map(({ id, name, path }, index) => (
+                <Link
+                  key={index}
+                  tabLink={`#${id}`}
+                  tabLinkActive={activeTabId === id}
+                  onClick={() => handleNav(path, id)}
+                  className={`whitespace-nowrap px-1 no-underline ${
+                    activeTabId === id
+                      ? "font-bold text-purple-700"
+                      : "text-gray-700"
+                  }`}
+                >
+                  {name.toUpperCase()}
+                </Link>
+              ))}
             </div>
           </div>
 
