@@ -25,8 +25,8 @@ const ProfilePage = () => {
   };
 
   return (
-    <Page name="settings">
-      <Navbar title="Settings" />
+    <Page name="User Profile">
+      <Navbar title="User Profile" />
 
       <BlockTitle>Form Example</BlockTitle>
       <List strongIos outlineIos dividersIos>

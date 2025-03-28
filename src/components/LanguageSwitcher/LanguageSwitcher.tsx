@@ -1,26 +1,33 @@
 import { Button, Popover, List, ListItem } from "framework7-react";
 import { useTranslation } from "react-i18next";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const LanguageSwitcher: React.FC = () => {
   const { i18n } = useTranslation();
   const [popoverOpened, setPopoverOpened] = useState(false);
+  const [currentLang, setCurrentLang] = useState("🌐 Select Language");
 
-  const changeLanguage = async (lng: string) => {
-    try {
-      const translation = await import(`@/i18n/locales/${lng}.json`);
-      i18n.addResourceBundle(
-        lng,
-        "translation",
-        translation.default,
-        true,
-        true,
-      );
-      i18n.changeLanguage(lng);
-    } catch (error) {
-      console.error(`Error loading ${lng} translation:`, error);
+  // Language mapping
+  const languages: Record<string, string> = {
+    en: "🇬🇧 English",
+    tl: "🇵🇭 Tagalog",
+    chs: "中文 (Simplified)",
+    cht: "中文 (Traditional)",
+  };
+
+  // Load selected language from local storage or fallback to "Select Language"
+  useEffect(() => {
+    const savedLang = localStorage.getItem("selectedLanguage");
+    if (savedLang && languages[savedLang]) {
+      setCurrentLang(languages[savedLang]);
+      i18n.changeLanguage(savedLang);
     }
+  }, []);
 
+  const changeLanguage = (lng: string) => {
+    i18n.changeLanguage(lng);
+    setCurrentLang(languages[lng]); // Update button text
+    localStorage.setItem("selectedLanguage", lng); // Save selection
     setPopoverOpened(false);
   };
 
@@ -31,7 +38,7 @@ const LanguageSwitcher: React.FC = () => {
         className="inline-block w-auto border"
         onClick={() => setPopoverOpened(true)}
       >
-        🌐 Select Language
+        {currentLang}
       </Button>
 
       <Popover
@@ -41,26 +48,14 @@ const LanguageSwitcher: React.FC = () => {
         style={{ width: "150px", minWidth: "auto" }}
       >
         <List>
-          <ListItem
-            link="#"
-            title="🇬🇧 English"
-            onClick={() => changeLanguage("en")}
-          />
-          <ListItem
-            link="#"
-            title="🇵🇭 Tagalog"
-            onClick={() => changeLanguage("ph")}
-          />
-          <ListItem
-            link="#"
-            title="中文 (Traditional)"
-            onClick={() => changeLanguage("cht")}
-          />
-          <ListItem
-            link="#"
-            title="中文 (Simplified)"
-            onClick={() => changeLanguage("chs")}
-          />
+          {Object.entries(languages).map(([lng, title]) => (
+            <ListItem
+              key={lng}
+              link="#"
+              title={title}
+              onClick={() => changeLanguage(lng)}
+            />
+          ))}
         </List>
       </Popover>
     </div>

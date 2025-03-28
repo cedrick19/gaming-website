@@ -139,7 +139,7 @@ const NavLinks = ({ isMobile }: { isMobile?: boolean }) => {
               }`}
             >
               <img
-                src="https://via.placeholder.com/30"
+                src="./assets/image/playeraccount.jpg"
                 alt="User"
                 className="h-7 w-7 rounded-full"
               />
