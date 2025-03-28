@@ -69,7 +69,7 @@ const NavLinks = ({ isMobile }: { isMobile: boolean }) => {
                 tabLink="#view-home"
                 tabLinkActive={true}
                 onClick={() => handleNav("/")}
-                className="whitespace-nowrap px-1 text-purple-700 no-underline"
+                className="whitespace-nowrap px-1 no-underline"
               >
                 HOMEPAGE
               </Link>
