@@ -1,5 +1,6 @@
+import { useState, useEffect } from "react";
 import { PageData } from "@/ts/PageData";
-import { f7, Link, Toolbar, View, Views, Icon } from "framework7-react";
+import { f7, Link, Icon, View, Views, Toolbar } from "framework7-react";
 import { useAuth } from "../AuthContext";
 import { getDevice } from "framework7";
 import LanguageSwitcher from "../LanguageSwitcher/LanguageSwitcher";
@@ -9,7 +10,25 @@ const NavLinks = ({ isMobile }: { isMobile: boolean }) => {
   const navigate = (path: string) =>
     f7.views.main.router.navigate(path, { animate: false });
 
-  const handleNav = (path: string) => {
+  const [activeTabId, setActiveTabId] = useState("view-home");
+
+  useEffect(() => {
+    const currentRoute = f7.views.main?.router.currentRoute;
+    if (currentRoute) {
+      const matchingPage = PageData.find(
+        (page) =>
+          currentRoute.path === page.path ||
+          currentRoute.path.startsWith(page.path),
+      );
+      if (matchingPage) {
+        setActiveTabId(matchingPage.id);
+      }
+    }
+  }, []);
+
+  const handleNav = (path: string, tabId: string) => {
+    setActiveTabId(tabId);
+
     if (isLoggedIn) navigate(path);
     else {
       f7.loginScreen.open("#loginHere", false);
@@ -29,28 +48,31 @@ const NavLinks = ({ isMobile }: { isMobile: boolean }) => {
                 key={index}
                 text={name}
                 tabLink={`#${id}`}
-                tabLinkActive={id === "view-home"}
-                onClick={() => handleNav(path)}
-                className="whitespace-nowrap text-xs"
+                tabLinkActive={id === activeTabId}
+                onClick={() => handleNav(path, id)}
+                className={`whitespace-nowrap text-xs ${id === activeTabId ? "font-bold text-purple-700" : ""}`}
               />
             ),
           )}
         </>
       ) : (
         <div className="flex w-full items-center px-4">
-          {/* Left section - Logo and Telegram */}
           <div
             className="mr-4 flex shrink-0 items-center"
             style={{ width: "15%" }}
           >
-            <Link className="flex flex-col items-center no-underline" href="/">
+            <Link
+              className="flex flex-col items-center no-underline"
+              href="/"
+              onClick={() => setActiveTabId("view-home")}
+            >
               <div className="flex items-center">
                 <span className="text-xl font-bold text-purple-600">
                   U8.COM
                 </span>
               </div>
               <div className="flex">
-                <span className="text-Black text-xs">Chinese Gaming</span>
+                <span className="text-xs text-black">Chinese Gaming</span>
               </div>
             </Link>
 
@@ -59,7 +81,7 @@ const NavLinks = ({ isMobile }: { isMobile: boolean }) => {
               className="ml-4 flex items-center text-blue-500 no-underline"
             >
               <Icon f7="logo_telegram" className="text-blue-500" />
-              <span className="ml-1 text-xs">@t.U8Support</span>
+              <span className="ml-1 text-xs">@t.u8Support</span>
             </Link>
           </div>
 
@@ -67,33 +89,50 @@ const NavLinks = ({ isMobile }: { isMobile: boolean }) => {
             <div className="flex space-x-6 text-xs font-medium uppercase">
               <Link
                 tabLink="#view-home"
-                tabLinkActive={true}
-                onClick={() => handleNav("/")}
-                className="whitespace-nowrap px-1 no-underline"
+                tabLinkActive={activeTabId === "view-home"}
+                onClick={() => handleNav("/", "view-home")}
+                className={`whitespace-nowrap px-1 no-underline ${
+                  activeTabId === "view-home"
+                    ? "font-bold text-purple-700"
+                    : "text-gray-700"
+                }`}
               >
                 HOMEPAGE
               </Link>
+
               {PageData.filter((page) => page.category === "games").map(
                 ({ id, name, path }, index) => (
                   <Link
                     key={index}
                     tabLink={`#${id}`}
-                    onClick={() => handleNav(path)}
-                    className="whitespace-nowrap px-1 text-gray-700 no-underline"
+                    tabLinkActive={activeTabId === id}
+                    onClick={() => handleNav(path, id)}
+                    className={`whitespace-nowrap px-1 no-underline ${
+                      activeTabId === id
+                        ? "font-bold text-purple-700"
+                        : "text-gray-700"
+                    }`}
                   >
                     {name.toUpperCase()}
                   </Link>
                 ),
               )}
+
               <Link
                 tabLink="#view-activity"
-                onClick={() => handleNav("/activity/")}
-                className="whitespace-nowrap px-1 text-gray-700 no-underline"
+                tabLinkActive={activeTabId === "view-activity"}
+                onClick={() => handleNav("/activity/", "view-activity")}
+                className={`whitespace-nowrap px-1 no-underline ${
+                  activeTabId === "view-activity"
+                    ? "font-bold text-purple-700"
+                    : "text-gray-700"
+                }`}
               >
                 PREFERENTIAL ACTIVITIES
               </Link>
             </div>
           </div>
+
           <div
             className="flex shrink-0 items-center justify-end space-x-3"
             style={{ width: "25%" }}
@@ -118,8 +157,13 @@ const NavLinks = ({ isMobile }: { isMobile: boolean }) => {
             </Link>
             <Link
               tabLink="#view-profile"
-              onClick={() => handleNav(profilePath)}
-              className="flex items-center no-underline"
+              tabLinkActive={activeTabId === "view-profile"}
+              onClick={() => handleNav(profilePath, "view-profile")}
+              className={`flex items-center no-underline ${
+                activeTabId === "view-profile"
+                  ? "rounded-lg bg-gray-100 p-1"
+                  : ""
+              }`}
             >
               <img
                 src="https://via.placeholder.com/30"
@@ -154,6 +198,7 @@ const NavBar = () => {
           <NavLinks isMobile={false} />
         </div>
       )}
+
       {PageData.map(({ id, name, path }, index) => (
         <View
           key={index}
