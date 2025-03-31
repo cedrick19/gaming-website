@@ -21,7 +21,6 @@ export const CustomModal = ({
     <Popup
       id={id}
       className={className}
-      opened={opened}
       onPopupClose={onClose}
       onPopupOpen={onOpen}
     >
