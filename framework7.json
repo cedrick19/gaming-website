@@ -1,8 +1,6 @@
 {
   "cwd": "C:\\Users\\User\\Documents\\ced\\gaming-website",
-  "type": [
-    "pwa"
-  ],
+  "type": ["pwa"],
   "name": "gamingwebsite",
   "framework": "react",
   "template": "tabs",
@@ -11,7 +9,7 @@
   "theming": {
     "customColor": false,
     "color": "#007aff",
-    "darkMode": true,
+    "darkMode": false,
     "iconFonts": true
   },
   "customBuild": false

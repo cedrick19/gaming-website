@@ -1,46 +1,39 @@
 import { createStore } from "framework7/lite";
 
-interface Product {
-  id: string;
-  title: string;
-  description: string;
+// Define user structure
+interface User {
+  id: number;
+  name: string;
+  email: string;
 }
 
+// Define store state
 interface State {
-  products: Product[];
+  users: User[];
 }
 
+// Create the store
 const store = createStore({
   state: {
-    products: [
-      {
-        id: "1",
-        title: "Apple iPhone 8",
-        description:
-          "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nisi tempora similique reiciendis, error nesciunt vero, blanditiis pariatur dolor, minima sed sapiente rerum, dolorem corrupti hic modi praesentium unde saepe perspiciatis.",
-      },
-      {
-        id: "2",
-        title: "Apple iPhone 8 Plus",
-        description:
-          "Velit odit autem modi saepe ratione totam minus, aperiam, labore quia provident temporibus quasi est ut aliquid blanditiis beatae suscipit odio vel! Nostrum porro sunt sint eveniet maiores, dolorem itaque!",
-      },
-      {
-        id: "3",
-        title: "Apple iPhone X",
-        description:
-          "Expedita sequi perferendis quod illum pariatur aliquam, alias laboriosam! Vero blanditiis placeat, mollitia necessitatibus reprehenderit. Labore dolores amet quos, accusamus earum asperiores officiis assumenda optio architecto quia neque, quae eum.",
-      },
-    ],
+    users: [] as User[], // Holds user data
   },
-  getters: {
-    products({ state }: { state: State }): Product[] {
-      return state.products;
+
+  actions: {
+    // Fetch users from API and update state
+    getUsers({ state }: { state: State }) {
+      fetch("some-url")
+        .then((res) => res.json())
+        .then((users: User[]) => {
+          state.users = users;
+        })
+        .catch((error) => console.error("Error fetching users:", error));
     },
   },
-  actions: {
-    addProduct({ state }: { state: State }, product: Product): void {
-      state.products = [...state.products, product];
+
+  getters: {
+    // Retrieve users from state
+    users({ state }: { state: State }) {
+      return state.users;
     },
   },
 });

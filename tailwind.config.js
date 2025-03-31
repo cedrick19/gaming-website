@@ -5,7 +5,15 @@ module.exports = {
     "./node_modules/framework7/**/*.{ts,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        "primary": "#A03D8C",
+        "secondary": "#4C2CCA"
+      },
+      fontFamily : {
+        sans: ["Nunito", "sans-serif"],
+      }
+    },
   },
   plugins: [],
 };
