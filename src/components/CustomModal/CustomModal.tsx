@@ -18,7 +18,13 @@ export const CustomModal = ({
   isNavbar?: boolean
 }) => {
   return (
-    <Popup id={id} className={className} onPopupClose={onClose} onPopupOpen={onOpen}>
+    <Popup
+      id={id}
+      className={className}
+      opened={opened}
+      onPopupClose={onClose}
+      onPopupOpen={onOpen}
+    >
       <Page>
         {isNavbar && (
           <Navbar>

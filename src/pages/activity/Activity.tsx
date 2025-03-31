@@ -72,7 +72,7 @@ const ActivityPage = () => {
 
         <Button onClick={() => f7.popup.open("#logoutConfirm")}>Log out</Button>
 
-        <CustomModal id="logoutConfirm">
+        <CustomModal id="logoutConfirm" opened={false}>
           <p>Are you sure you want to log out?</p>
           <Block className="grid-gap grid grid-cols-2">
             <Button popupClose="#logoutConfirm">Cancel</Button>
