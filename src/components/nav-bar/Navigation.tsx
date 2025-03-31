@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { PageData } from "@/ts/PageData";
-import { f7, Link, Icon, View, Views, Toolbar, Block } from "framework7-react";
+import { f7, Link, Icon, View, Views, Toolbar, Block, Button } from "framework7-react";
 import { useAuth } from "../AuthContext";
 import { getDevice } from "framework7";
 import LanguageSwitcher from "../LanguageSwitcher/LanguageSwitcher";
@@ -14,6 +14,8 @@ const NavLinks = ({
   activeTab: string, 
   handleNavFunc: (path: string, tabId: string) => void 
 }) => {
+  const { isLoggedIn } = useAuth();
+
   return (
     <>
       {isMobile
@@ -76,7 +78,7 @@ const NavLinks = ({
             </Block>
           </Block>
 
-          <Block className="flex shrink-0 items-center justify-end space-x-3 w-1/4">
+          <Block className="flex shrink-0 items-center justify-end space-x-3">
               {["arrow_down_circle", "bell"].map((icon, index) => (
                 <Link
                   key={index}
@@ -91,7 +93,10 @@ const NavLinks = ({
                   </span>
                 </Link>
               ))}
-              <UserProfile activeTabId={activeTab} handleNav={handleNavFunc} />
+              {isLoggedIn
+              ? (<UserProfile activeTabId={activeTab} handleNav={handleNavFunc} />)
+              : (<Button onClick={() => f7.popup.open("#loginHere")}>Login</Button>)}
+              
               <LanguageSwitcher />
           </Block>
         </>
@@ -131,7 +136,7 @@ const UserProfile = ({
 
 const NavBar = () => {
   const isMobile = getDevice().android || getDevice().ios;
-  const [activeTabId, setActiveTabId] = useState("view-home")
+  const [activeTabId, setActiveTabId] = useState<string>("view-home")
   const { isLoggedIn } = useAuth();
 
   useEffect(() => {
@@ -147,7 +152,10 @@ const NavBar = () => {
   }, [])
 
   const handleNav = (path:string, tabId: string) => {
-    if (!isLoggedIn) f7.loginScreen.open("#loginHere", false)
+    if (!isLoggedIn) {
+      f7.popup.open("#loginHere", false)
+      return null;
+    } 
     else {
       setActiveTabId(tabId);
       f7.views.main.router.navigate(path, { animate: false })
