@@ -3,7 +3,7 @@ import Framework7 from "framework7/lite-bundle";
 import Framework7React from "framework7-react";
 import "framework7/css/bundle";
 import "../assets/css/icons.css";
-import "../assets/css/app.scss";
+import "../assets/css/app.css";
 import "../i18n";
 import { createElement } from "react";
 import MyApp from "@/app";
