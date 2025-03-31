@@ -2,7 +2,6 @@ import { CustomModal } from "@/components/CustomModal";
 import { useAuth } from "@/components/AuthContext";
 import {
   Page,
-  Navbar,
   List,
   ListInput,
   ListItem,
@@ -28,24 +27,8 @@ const ProfilePage = () => {
   return (
     <Page name="settings">
       <Layout>
-        <Navbar title="Settings" />
         <BlockTitle>Form Example</BlockTitle>
         <List strongIos outlineIos dividersIos>
-          <ListInput label="Name" type="text" placeholder="Your name" />
-
-          <ListInput label="E-mail" type="email" placeholder="E-mail" />
-
-          <ListInput label="URL" type="url" placeholder="URL" />
-
-          <ListInput label="Password" type="password" placeholder="Password" />
-
-          <ListInput label="Phone" type="tel" placeholder="Phone" />
-
-          <ListInput label="Gender" type="select">
-            <option>Male</option>
-            <option>Female</option>
-          </ListInput>
-
           <ListInput
             label="Birth date"
             type="date"
@@ -70,7 +53,7 @@ const ProfilePage = () => {
           />
         </List>
 
-        <Button onClick={() => f7.popup.open("#logoutConfirm")}>Log out</Button>
+        <Button onClick={() => f7.popup.open("#logoutConfirm", false)}>Log out</Button>
 
         <CustomModal id="logoutConfirm">
           <p>Are you sure you want to log out?</p>
