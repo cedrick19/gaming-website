@@ -1,4 +1,4 @@
-import { Block, Icon, Link, Page } from "framework7-react";
+import { Block, Icon, Link, Page, App, View } from "framework7-react";
 import { useTranslation } from "react-i18next";
 
 import { LoginModal } from "@/components/LoginModal";
@@ -49,6 +49,7 @@ const HomePage = () => {
           />
         </SwiperSlide>
       </Swiper>
+
       <Layout>
         this is home
         <Block>
