@@ -1,4 +1,4 @@
-import { Block, Icon, Link, Page, App, View } from "framework7-react";
+import { Block, Icon, Link, Page, Navbar } from "framework7-react";
 import { useTranslation } from "react-i18next";
 
 import { LoginModal } from "@/components/LoginModal";
@@ -8,24 +8,31 @@ import { Pagination, Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import Layout from "@/layout/layout";
+import { getDevice } from "framework7";
 
 const HomePage = () => {
   const { t } = useTranslation();
+  const isMobile = getDevice().ios || getDevice().android
+
   return (
     <Page>
       {/* Mobile Banner Layout */}
-      <div className="flex w-full justify-start bg-gradient-to-r from-blue-300 to-blue-600 p-5 md:hidden">
-        <Link tabLink="#view-home">
-          <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-xl font-bold text-transparent">
-            U8.COM
-          </span>
-          <span className="text-xs font-light">Chinese Gaming</span>
-        </Link>
-        <Link href="#">
-          <Icon f7="logo_telegram" className="text-blue-500" />
-          <span className="ml-1 text-xs">@t.u2support</span>
-        </Link>
-      </div>
+      {isMobile && (
+        <Navbar>
+          <Block className="flex w-full bg-gradient-to-r from-blue-300 to-blue-600 p-5">
+            <Link tabLink="#view-home" className="flex flex-col">
+              <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-xl font-bold text-transparent">
+                U8.COM
+              </span>
+              <span className="text-xs font-light">Chinese Gaming</span>
+            </Link>
+            <Link href="#">
+              <Icon f7="logo_telegram" className="text-blue-500" />
+              <span className="ml-1 text-xs">@t.u2support</span>
+            </Link>
+          </Block>
+        </Navbar>
+      )}
 
       <Swiper
         slidesPerView={1}

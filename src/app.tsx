@@ -1,11 +1,11 @@
 import type React from "react";
 
-import { App, View } from "framework7-react";
-import { useState, useEffect } from "react";
+import { App, f7, View } from "framework7-react";
+import { useEffect } from "react";
 import routes from "./ts/routes";
 import NavBar from "./components/nav-bar/Navigation";
 import { AuthProvider } from "./components/AuthContext";
-import WelcomeModal from "./components/WelcomeModal/welcome-modal";
+import { CustomModal } from "./components/CustomModal";
 
 const appConfig = {
   name: "gamingwebsite",
@@ -14,15 +14,9 @@ const appConfig = {
 };
 
 const MyApp: React.FC = () => {
-  const [modalOpened, setModalOpened] = useState(false);
-
   useEffect(() => {
-    setModalOpened(true);
+    f7.popup.open("#welcome", false)
   }, []);
-
-  const handleModalClose = () => {
-    setModalOpened(false);
-  };
 
   return (
     <AuthProvider>
@@ -30,7 +24,14 @@ const MyApp: React.FC = () => {
         <NavBar />
         <View main tab url="/" browserHistory browserHistorySeparator="" />
 
-        <WelcomeModal opened={modalOpened} onModalClosed={handleModalClose} />
+        <CustomModal
+          title="Welcome!"
+          id="welcome"
+          onClose={() => f7.popup.close("#welcome", false)}
+          isNavbar={false}
+        >
+          Wilkommen!
+        </CustomModal>
       </App>
     </AuthProvider>
   );
