@@ -1,4 +1,4 @@
-import { Block, Icon, Link, Page, Navbar } from "framework7-react";
+import { Block, Icon, Link, Page, Navbar, NavLeft } from "framework7-react";
 import { useTranslation } from "react-i18next";
 
 import { LoginModal } from "@/components/LoginModal";
@@ -18,19 +18,19 @@ const HomePage = () => {
     <Page>
       {/* Mobile Banner Layout */}
       {isMobile && (
-        <Navbar>
-          <Block className="flex w-full bg-gradient-to-r from-blue-300 to-blue-600 p-5">
+        <Navbar innerClassName="p-5 bg-gradient-to-r from-secondary/0 to-secondary/20">
+          <NavLeft>
             <Link tabLink="#view-home" className="flex flex-col">
               <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-xl font-bold text-transparent">
                 U8.COM
               </span>
-              <span className="text-xs font-light">Chinese Gaming</span>
+              <span className={`text-xs font-light ${getDevice().ios && "text-black"}`}>Chinese Gaming</span>
             </Link>
             <Link href="#">
               <Icon f7="logo_telegram" className="text-blue-500" />
               <span className="ml-1 text-xs">@t.u2support</span>
             </Link>
-          </Block>
+          </NavLeft>
         </Navbar>
       )}
 
