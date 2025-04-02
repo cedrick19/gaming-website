@@ -202,7 +202,7 @@ const NavBar = () => {
             {isLoggedIn ? (
               <UserProfile
                 activeTabId={activeTabId}
-                handleNav={() => f7nav("/profile/", "view-profile")}
+                handleNav={() => handleNav("/profile/", "view-profile")}
               />
             ) : (
               <Button
