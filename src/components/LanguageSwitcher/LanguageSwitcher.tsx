@@ -35,7 +35,7 @@ const LanguageSwitcher: React.FC = () => {
     <div className="relative">
       <Button
         popoverOpen=".language-popover"
-        className="inline-block w-auto text-transparent bg-primary-gradient bg-clip-text"
+        className="bg-primary-gradient inline-block w-auto bg-clip-text text-transparent transition duration-300 hover:bg-opacity-80"
         onClick={() => setPopoverOpened(true)}
       >
         {currentLang}
@@ -45,15 +45,21 @@ const LanguageSwitcher: React.FC = () => {
         className="language-popover"
         opened={popoverOpened}
         onPopoverClosed={() => setPopoverOpened(false)}
-        style={{ width: "150px", minWidth: "auto" }}
+        style={{
+          width: "200px",
+          minWidth: "auto",
+          borderRadius: "8px",
+          boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+        }}
       >
-        <List>
+        <List className="p-2">
           {Object.entries(languages).map(([lng, title]) => (
             <ListItem
               key={lng}
               link="#"
               title={title}
               onClick={() => changeLanguage(lng)}
+              className="transition duration-200 hover:bg-gray-200"
             />
           ))}
         </List>

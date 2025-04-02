@@ -13,6 +13,7 @@ import {
   f7,
 } from "framework7-react";
 import Layout from "@/layout/layout";
+import LanguageSwitcher from "@/components/LanguageSwitcher/LanguageSwitcher";
 
 const ProfilePage = () => {
   const { logout, setActiveTabId } = useAuth();
@@ -56,9 +57,17 @@ const ProfilePage = () => {
             placeholder="Bio"
             resizable
           />
+          <Block className="my-6">
+            <BlockTitle>Language Preferences</BlockTitle>
+            <div className="text-left">
+              <LanguageSwitcher />
+            </div>
+          </Block>
         </List>
 
-        <Button onClick={() => f7.popup.open("#logoutConfirm", false)}>Log out</Button>
+        <Button onClick={() => f7.popup.open("#logoutConfirm", false)}>
+          Log out
+        </Button>
 
         <CustomModal id="logoutConfirm">
           <p>Are you sure you want to log out?</p>
