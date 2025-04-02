@@ -16,6 +16,10 @@ const appConfig = {
 const MyApp: React.FC = () => {
   useEffect(() => {
     f7.popup.open("#welcome", false)
+
+    if (window.location.pathname !== "/") {
+      window.history.replaceState({}, "", "/");
+    }
   }, []);
 
   return (
