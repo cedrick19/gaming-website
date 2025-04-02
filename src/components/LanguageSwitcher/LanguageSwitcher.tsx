@@ -1,6 +1,6 @@
 import { Button, Popover, List, ListItem } from "framework7-react";
 import { useTranslation } from "react-i18next";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 
 const LanguageSwitcher: React.FC = () => {
   const { i18n } = useTranslation();
@@ -8,12 +8,12 @@ const LanguageSwitcher: React.FC = () => {
   const [currentLang, setCurrentLang] = useState("🌐 Select Language");
 
   // Language mapping
-  const languages: Record<string, string> = {
+  const languages: Record<string, string> = useMemo(() => ({
     en: "🇬🇧 English",
     tl: "🇵🇭 Tagalog",
     chs: "中文 (Simplified)",
     cht: "中文 (Traditional)",
-  };
+  }), []);
 
   // Load selected language from local storage or fallback to "Select Language"
   useEffect(() => {
@@ -22,7 +22,7 @@ const LanguageSwitcher: React.FC = () => {
       setCurrentLang(languages[savedLang]);
       i18n.changeLanguage(savedLang);
     }
-  }, []);
+  }, [i18n, languages]);
 
   const changeLanguage = (lng: string) => {
     i18n.changeLanguage(lng);

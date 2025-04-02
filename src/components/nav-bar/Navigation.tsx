@@ -10,7 +10,7 @@ import {
   Block,
   Button,
 } from "framework7-react";
-import { useAuth } from "../AuthContext";
+import { useAuth } from "@/hooks/useAuth";
 import { getDevice } from "framework7";
 
 const NavLinks = ({

@@ -9,7 +9,7 @@ import {
   View,
 } from "framework7-react";
 import { useState } from "react";
-import { useAuth } from "../AuthContext";
+import { useAuth } from "@/hooks/useAuth";
 
 export const LoginModal = () => {
   const [username, setUsername] = useState<string>("");

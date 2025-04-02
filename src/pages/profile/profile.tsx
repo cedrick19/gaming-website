@@ -1,5 +1,5 @@
 import { CustomModal } from "@/components/CustomModal";
-import { useAuth } from "@/components/AuthContext";
+import { useAuth } from "@/hooks/useAuth";
 import {
   Page,
   List,
