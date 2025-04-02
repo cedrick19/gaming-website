@@ -16,6 +16,7 @@ interface PageType {
   path: string;
   component: Component
   category?: "games" | "default";
+  requiresAuth?: boolean
 }
 
 export const PageData: PageType[] = [

@@ -14,23 +14,21 @@ const NavLinks = ({
   activeTab: string, 
   handleNavFunc: (path: string, tabId: string) => void 
 }) => {
-  const { isLoggedIn } = useAuth();
-
   return (
     <>
       {isMobile
-      ? (
-        PageData.filter((page) => page.category === "default")
+      ? (PageData.filter((page) => page.category === "default")
         .map(({ id, name, path}, index) => (
           <Link
             key={index}
             text={id === "view-activity" ? "Activity" : name}
             tabLink={`#${id}`}
+            rippleColor="none"
             tabLinkActive={id === activeTab}
             onClick={() => handleNavFunc(path, id)}
             className={`whitespace-nowrap text-xs ${
               id === activeTab
-              ? "font=bold text-transparent bg-gradient-to-r from-primary to-secondary bg-clip-text"
+              ? "font=bold text-transparent bg-primary-gradient bg-clip-text"
               : ""
             }`}
           />
@@ -38,25 +36,6 @@ const NavLinks = ({
       )
       : (
         <>
-          <Block className="mr-4 flex shrink-0 items-center w-1/5">
-            <Link
-              tabLink="#view-home"
-              onClick={() => handleNavFunc("/", "view-home")}
-              className="flex flex-col"
-            >
-              <span className="text-xl font-bold text-transparent bg-gradient-to-r from-primary to-secondary bg-clip-text">
-                U8.COM
-              </span>
-              <span className="text-xs font-light">Chinese Gaming</span>
-            </Link>
-            <Link href="#" className="flex items-center text-blue-500 no-underline">
-              <Icon f7="logo_telegram" className="text-blue-500" />
-              <span className="ml-1 text-xs">
-                @t.u2support
-              </span>
-            </Link>
-          </Block>
-
           <Block className="flex justify-center w-3/5">
             <Block className="flex space-x-6 text-xs">
               {PageData.filter((page) => page.name !== "Games" && page.name !== "Profile")
@@ -65,39 +44,25 @@ const NavLinks = ({
                   key={index}
                   tabLink={`#${id}`}
                   tabLinkActive={activeTab === id}
+                  rippleColor="none"
                   onClick={() => handleNavFunc(path, id)}
                   className={`whitespace-nowrap no-underline ${
                     activeTab === id
-                    ? "font-black text-transparent bg-gradient-to-r from-primary to-secondary bg-clip-text"
+                    ? "font-black text-transparent bg-primary-gradient bg-clip-text"
                     : "font-semibold text-gray-700"
                   }`}
                 >
-                  {name.toUpperCase()}
-                </Link>
-              ))}
-            </Block>
-          </Block>
-
-          <Block className="flex shrink-0 items-center justify-end space-x-3">
-              {["arrow_down_circle", "bell"].map((icon, index) => (
-                <Link
-                  key={index}
-                  href="#"
-                  className="flex flex-col items-center no-underline">
-                  <Icon
-                    f7={icon}
-                    className="text-xl text-transparent bg-gradient-to-r from-primary to-secondary bg-clip-text"
-                  />
-                  <span className="text-xs text-gray-600">
-                    {icon === "arrow_down_circle" ? "DOWNLOAD" : "NEWS"}
+                  <span className={`whitespace-nowrap no-underline ${
+                    activeTab === id
+                    ? "font-black text-transparent bg-primary-gradient bg-clip-text"
+                    : "font-semibold text-gray-700"
+                  }`}
+                  >
+                    {name.toUpperCase()}
                   </span>
                 </Link>
               ))}
-              {isLoggedIn
-              ? (<UserProfile activeTabId={activeTab} handleNav={handleNavFunc} />)
-              : (<Button onClick={() => f7.popup.open("#loginHere")}>Login</Button>)}
-              
-              <LanguageSwitcher />
+            </Block>
           </Block>
         </>
       )}
@@ -113,13 +78,14 @@ const UserProfile = ({
   handleNav: (path:string, tabId: string) => void 
 }) => {
   const profilePage = PageData.find((page) => page.id === "view-profile")
-  const profilePath = profilePage ? profilePage.path : "/profile/"
+  const profilePath = profilePage?.path || "/profile/"
 
   return (
     <Link
       tabLink="#view-profile"
       onClick={() => handleNav(profilePath, "view-profile")}
       className={`flex items-center no-underline ${activeTabId === "view-profile" ? "rounded-lg bg-gray-100 p-1" : ""}`}
+      rippleColor="none"
     >
       <img
         src="./assets/image/playeraccount.jpg"
@@ -153,7 +119,7 @@ const NavBar = () => {
 
   const handleNav = (path:string, tabId: string) => {
     if (!isLoggedIn) {
-      f7.popup.open("#loginHere", false)
+      f7.loginScreen.open("#loginHere", false)
       return null;
     } 
     else {
@@ -174,10 +140,61 @@ const NavBar = () => {
         </Toolbar>
       ) : (
         <Block className="container mx-auto flex h-8 w-full items-center justify-between">
+
+          <Block className="mr-4 flex shrink-0 items-center w-1/5">
+            <Link
+              tabLink="#view-home"
+              className="flex flex-col"
+              rippleColor="none"
+            >
+              <span className="text-xl font-bold text-transparent bg-primary-gradient bg-clip-text">
+                U8.COM
+              </span>
+              <span className="text-xs font-light text-black">Chinese Gaming</span>
+            </Link>
+            <Link href="#" className="flex items-center text-blue-500 no-underline" rippleColor="none">
+              <Icon f7="logo_telegram" className="text-blue-500" />
+              <span className="ml-1 text-xs">
+                @t.u2support
+              </span>
+            </Link>
+          </Block>
+
           <NavLinks 
             activeTab={activeTabId} 
             handleNavFunc={handleNav}
           />
+
+          <Block className="flex shrink-0 items-center justify-end space-x-3">
+            {["arrow_down_circle", "bell"].map((icon, index) => (
+              <Link
+                key={index}
+                href="#"
+                className="flex flex-col items-center no-underline"
+                rippleColor="none"
+              >
+                <Icon
+                  f7={icon}
+                  className="text-xl text-transparent bg-primary-gradient bg-clip-text"
+                />
+                <span className="text-xs text-gray-600">
+                  {icon === "arrow_down_circle" ? "DOWNLOAD" : "NEWS"}
+                </span>
+              </Link>
+            ))}
+
+            {isLoggedIn
+            ? <UserProfile activeTabId={activeTabId} handleNav={() => handleNav("/profile/", 'view-profile')} />
+            : <Button 
+                onClick={() => f7.loginScreen.open("#loginHere", false)} 
+                rippleColor="none"
+                className="text-transparent bg-primary-gradient bg-clip-text"
+              >
+                Login
+              </Button>
+            }
+            <LanguageSwitcher />
+          </Block>
         </Block>
       )}
 
