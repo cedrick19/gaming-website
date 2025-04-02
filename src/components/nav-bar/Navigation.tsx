@@ -188,7 +188,7 @@ const NavBar = () => {
             ))}
 
             {isLoggedIn
-            ? <UserProfile activeTabId={activeTabId} handleNav={() => f7nav("/profile/", 'view-profile')} />
+            ? <UserProfile activeTabId={activeTabId} handleNav={() => handleNav("/profile/", 'view-profile')} />
             : <Button 
                 onClick={() => f7.loginScreen.open("#loginHere", false)} 
                 rippleColor="none"

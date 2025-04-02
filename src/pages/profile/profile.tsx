@@ -15,12 +15,17 @@ import {
 import Layout from "@/layout/layout";
 
 const ProfilePage = () => {
-  const { logout } = useAuth();
-  const navigate = (path: string) => f7.tab.show(path);
+  const { logout, setActiveTabId } = useAuth();
+
+  const f7nav = ( path: string, id: string) => {
+    f7.views.main.router.navigate(path, { animate: false })
+    f7.tab.show(`#${id}`)
+  }
 
   const handleLogout = () => {
     f7.popup.close("#logoutConfirm");
-    navigate("#view-home");
+    f7nav('/', 'view-home')
+    setActiveTabId('view-home')
     logout();
   };
 
