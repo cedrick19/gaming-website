@@ -1,18 +1,21 @@
-import { Block, Icon, Link, Page, Navbar } from "framework7-react";
+import { Block, Icon, Link, Page, Navbar, Button } from "framework7-react";
 import { useTranslation } from "react-i18next";
 
 import { LoginModal } from "@/components/LoginModal";
 
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Pagination, Autoplay } from "swiper/modules";
+import { Pagination, Autoplay, Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
+import "swiper/css/navigation";
 import Layout from "@/layout/layout";
 import { getDevice } from "framework7";
+import { useState } from "react";
 
 const HomePage = () => {
   const { t } = useTranslation();
-  const isMobile = getDevice().ios || getDevice().android
+  const [isHovered, setIsHovered] = useState(false);
+  const isMobile = getDevice().ios || getDevice().android;
 
   return (
     <Page>
@@ -34,28 +37,51 @@ const HomePage = () => {
         </Navbar>
       )}
 
-      <Swiper
-        slidesPerView={1}
-        pagination={{ clickable: true }}
-        autoplay={{ delay: 4000, disableOnInteraction: false }}
-        modules={[Pagination, Autoplay]}
-        className="w-full"
+      <div
+        className="relative w-full"
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
       >
-        <SwiperSlide>
-          <img
-            src="./assets/image/carousel1.jpg"
-            alt="Promotional Banner 1"
-            className="h-auto w-full"
-          />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img
-            src="./assets/image/carousel2.jpg"
-            alt="Promotional Banner 2"
-            className="h-auto w-full"
-          />
-        </SwiperSlide>
-      </Swiper>
+        {/* Swiper Component */}
+        <Swiper
+          slidesPerView={1}
+          pagination={{ clickable: true }}
+          autoplay={{ delay: 4000, disableOnInteraction: false }}
+          navigation={{
+            nextEl: ".swiper-button-next",
+            prevEl: ".swiper-button-prev",
+          }}
+          modules={[Navigation, Pagination, Autoplay]}
+          className="w-full"
+        >
+          <SwiperSlide>
+            <img
+              src="./assets/image/carousel1.jpg"
+              alt="Promotional Banner 1"
+              className="h-auto w-full"
+            />
+          </SwiperSlide>
+          <SwiperSlide>
+            <img
+              src="./assets/image/carousel2.jpg"
+              alt="Promotional Banner 2"
+              className="h-auto w-full"
+            />
+          </SwiperSlide>
+        </Swiper>
+
+        <Button
+          className={`swiper-button-prev absolute left-4 top-1/2 hidden bg-opacity-60 p-4 text-white transition-opacity duration-300 md:flex ${
+            isHovered ? "opacity-100" : "opacity-0"
+          }`}
+        />
+
+        <Button
+          className={`swiper-button-next absolute right-4 top-1/2 hidden bg-opacity-60 p-4 text-white transition-opacity duration-300 md:flex ${
+            isHovered ? "opacity-100" : "opacity-0"
+          }`}
+        />
+      </div>
 
       <Layout>
         this is home
