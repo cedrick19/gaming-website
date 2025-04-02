@@ -35,7 +35,7 @@ const LanguageSwitcher: React.FC = () => {
     <div className="relative">
       <Button
         popoverOpen=".language-popover"
-        className="inline-block w-auto border"
+        className="inline-block w-auto text-transparent bg-primary-gradient bg-clip-text"
         onClick={() => setPopoverOpened(true)}
       >
         {currentLang}
