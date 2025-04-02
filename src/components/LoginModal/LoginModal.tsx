@@ -14,13 +14,15 @@ import { useAuth } from "../AuthContext";
 export const LoginModal = () => {
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  const { login } = useAuth();
+  const { login, setActiveTabId } = useAuth();
 
   const handleLogin = () => {
     login();
     f7.loginScreen.close("#loginHere", false);
     f7.views.main.router.navigate("/", { animate: false })
+    setActiveTabId("view-home")
   };
+
   return (
     <LoginScreen id="loginHere">
       <View>
@@ -44,7 +46,12 @@ export const LoginModal = () => {
           </List>
           <List>
             <ListButton title="Sign In" onClick={handleLogin} />
-            <ListButton title="Go Back" onClick={() => f7.loginScreen.close("#loginHere", false)} />
+            <ListButton title="Go Back" onClick={() => {
+              f7.loginScreen.close("#loginHere", false)
+              f7.views.main.router.navigate("/", { animate: false })
+              setActiveTabId("view-home")
+            }}
+            />
           </List>
         </Page>
       </View>

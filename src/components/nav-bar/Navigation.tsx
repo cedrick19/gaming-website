@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { PageData } from "@/ts/PageData";
 import { f7, Link, Icon, View, Views, Toolbar, Block, Button } from "framework7-react";
 import { useAuth } from "../AuthContext";
@@ -8,11 +8,11 @@ import LanguageSwitcher from "../LanguageSwitcher/LanguageSwitcher";
 const NavLinks = ({ 
   isMobile, 
   activeTab, 
-  handleNavFunc
+  handleNavFunc,
 }: {
   isMobile?: boolean, 
   activeTab: string, 
-  handleNavFunc: (path: string, tabId: string) => void 
+  handleNavFunc: (path: string, tabId: string) => void,
 }) => {
   return (
     <>
@@ -43,7 +43,7 @@ const NavLinks = ({
                 <Link
                   key={index}
                   tabLink={`#${id}`}
-                  tabLinkActive={activeTab === id}
+                  tabLinkActive={id === activeTab}
                   rippleColor="none"
                   onClick={() => handleNavFunc(path, id)}
                   className={`whitespace-nowrap no-underline ${
@@ -102,8 +102,12 @@ const UserProfile = ({
 
 const NavBar = () => {
   const isMobile = getDevice().android || getDevice().ios;
-  const [activeTabId, setActiveTabId] = useState<string>("view-home")
-  const { isLoggedIn } = useAuth();
+  const { isLoggedIn, activeTabId, setActiveTabId } = useAuth();
+
+  const f7nav = ( path: string, id: string) => {
+    f7.views.main.router.navigate(path, { animate: false })
+    f7.tab.show(`#${id}`)
+  }
 
   useEffect(() => {
     if (f7.views.main?.router.currentRoute) {
@@ -115,17 +119,17 @@ const NavBar = () => {
         setActiveTabId(PageMatch.id)
       }
     }
-  }, [])
+  }, [setActiveTabId])
 
   const handleNav = (path:string, tabId: string) => {
     if (!isLoggedIn) {
       f7.loginScreen.open("#loginHere", false)
-      return null;
+      f7nav("/", "view-home")
+      return;
     } 
-    else {
-      setActiveTabId(tabId);
-      f7.views.main.router.navigate(path, { animate: false })
-    }
+
+    setActiveTabId(tabId);
+    f7nav(path, tabId)
   }
 
   return (
@@ -184,7 +188,7 @@ const NavBar = () => {
             ))}
 
             {isLoggedIn
-            ? <UserProfile activeTabId={activeTabId} handleNav={() => handleNav("/profile/", 'view-profile')} />
+            ? <UserProfile activeTabId={activeTabId} handleNav={() => f7nav("/profile/", 'view-profile')} />
             : <Button 
                 onClick={() => f7.loginScreen.open("#loginHere", false)} 
                 rippleColor="none"
