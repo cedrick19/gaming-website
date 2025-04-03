@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { BlockTitle, Icon } from "framework7-react";
+import { Icon } from "framework7-react";
 
 export default function MarqueeNotification() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -39,7 +39,7 @@ export default function MarqueeNotification() {
   }, []);
 
   return (
-    <BlockTitle className="mx-5 rounded-full bg-blue-500 p-2 text-white">
+    <div className="mx-5 mt-3 rounded-full bg-blue-500 p-1 text-white">
       <div
         ref={containerRef}
         className="relative h-6 w-full overflow-hidden" // Added overflow-hidden
@@ -71,6 +71,6 @@ export default function MarqueeNotification() {
           </span>
         </div>
       </div>
-    </BlockTitle>
+    </div>
   );
 }
