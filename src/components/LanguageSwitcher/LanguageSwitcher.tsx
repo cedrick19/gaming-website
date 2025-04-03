@@ -1,6 +1,6 @@
 import { Button, Popover, List, ListItem } from "framework7-react";
 import { useTranslation } from "react-i18next";
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 
 const languages: Record<string, string> = {
   en: "🇬🇧 English",
@@ -11,35 +11,33 @@ const languages: Record<string, string> = {
 
 const LanguageSwitcher: React.FC = () => {
   const { i18n } = useTranslation();
+  const savedLang = localStorage.getItem("i18nextLng") || "en";
   const [popoverOpened, setPopoverOpened] = useState(false);
-  const [currentLang, setCurrentLang] = useState(() => {
-    const savedLang = localStorage.getItem("i18nextLng");
-    return savedLang && languages[savedLang]
-      ? languages[savedLang]
-      : "🌐 Select Language";
-  });
+  const [currentLang, setCurrentLang] = useState(
+    languages[savedLang] || "🌐 Select Language",
+  );
 
   useEffect(() => {
-    const savedLang = localStorage.getItem("i18nextLng");
-    if (savedLang && languages[savedLang] && i18n.language !== savedLang) {
+    if (i18n.language !== savedLang) {
       i18n.changeLanguage(savedLang);
     }
-  }, [i18n]);
+  }, [i18n, savedLang]);
 
-  const changeLanguage = useCallback(
-    (lng: string) => {
+  const changeLanguage = (lng: string) => {
+    if (i18n.language !== lng) {
       i18n.changeLanguage(lng);
+      localStorage.setItem("i18nextLng", lng);
       setCurrentLang(languages[lng]);
-      setPopoverOpened(false);
-    },
-    [i18n],
-  );
+    }
+    setPopoverOpened(false);
+  };
 
   return (
     <div className="relative">
       <Button
-        className="inline-block bg-primary-gradient bg-clip-text text-transparent transition duration-300 hover:bg-opacity-80"
-        onClick={() => setPopoverOpened(true)}
+        popoverOpen=".language-popover"
+        className="inline-block w-auto border"
+        onClick={setPopoverOpened}
       >
         {currentLang}
       </Button>
@@ -48,15 +46,15 @@ const LanguageSwitcher: React.FC = () => {
         className="language-popover"
         opened={popoverOpened}
         onPopoverClosed={() => setPopoverOpened(false)}
+        style={{ width: "200px", minWidth: "auto" }}
       >
-        <List className="w-52 rounded-lg bg-white p-2 shadow-md">
+        <List>
           {Object.entries(languages).map(([lng, title]) => (
             <ListItem
               key={lng}
               link="#"
               title={title}
               onClick={() => changeLanguage(lng)}
-              className="cursor-pointer transition duration-200 hover:bg-gray-200"
             />
           ))}
         </List>
