@@ -107,7 +107,7 @@ const HomePage = () => {
       </div>
 
       <TextCarousel />
-      <div className="flex w-full items-center justify-between rounded-b-[2rem] border-b-2 border-violet-500 p-5 shadow-[0_4px_10px_rgba(138,43,226,0.5)] shadow-lg">
+      <div className="flex w-full items-center justify-between rounded-b-[2rem] border-b-2 border-violet-500 p-5 shadow-[0_4px_10px_rgba(138,43,226,0.5)]">
         <div className="flex items-center">
           <img
             src="./assets/image/playeraccount.jpg"
