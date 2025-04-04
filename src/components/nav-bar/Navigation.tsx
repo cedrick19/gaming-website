@@ -174,7 +174,6 @@ const NavBar = () => {
 
     setActiveTabId(tabId);
     f7nav(path, tabId);
-    console.log("Navigating: ", path);
   };
 
   return (
