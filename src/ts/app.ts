@@ -8,8 +8,10 @@ import "../i18n";
 import { createElement } from "react";
 import MyApp from "@/app";
 
-// eslint-disable-next-line react-hooks/rules-of-hooks
-Framework7.use(Framework7React);
+const F7init = () => {
+    Framework7.use(Framework7React);
+}
 
 const root = createRoot(document.getElementById("app") as HTMLElement);
+F7init();
 root.render(createElement(MyApp));

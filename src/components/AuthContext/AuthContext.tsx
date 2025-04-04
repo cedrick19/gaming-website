@@ -1,14 +1,5 @@
-import { createContext, useContext, useState } from "react";
-
-interface AuthType {
-  isLoggedIn: boolean;
-  login: () => void;
-  logout: () => void;
-  activeTabId: string;
-  setActiveTabId: (tabId: string) => void;
-}
-
-const AuthContext = createContext<AuthType | undefined>(undefined);
+import { AuthContext } from "@/hooks/useAuth";
+import { useState } from "react";
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
@@ -32,9 +23,4 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-export const useAuth = () => {
-  const context = useContext(AuthContext);
 
-  if (!context) throw new Error("useAuth must be used within an AuthProvider.");
-  return context;
-};

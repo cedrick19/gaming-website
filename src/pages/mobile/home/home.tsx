@@ -23,7 +23,7 @@ import { useState } from "react";
 const HomePage = () => {
   const { t } = useTranslation();
   const [isHovered, setIsHovered] = useState(false);
-  const isMobile = getDevice().ios || getDevice().android;
+  const isMobile = getDevice().ios || getDevice().android || window.matchMedia("(max-width: 1024px)").matches;;
 
   return (
     <Page>
