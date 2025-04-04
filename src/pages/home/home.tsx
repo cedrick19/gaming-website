@@ -25,7 +25,13 @@ import TextCarousel from "./TextCarousel";
 const HomePage = () => {
   const { t } = useTranslation();
   const [isHovered, setIsHovered] = useState(false);
+  const [isEyeOn, setIsEyeOn] = useState(true); // State to toggle eye icon
   const isMobile = getDevice().ios || getDevice().android;
+
+  // Toggle the eye icon
+  const toggleEye = () => {
+    setIsEyeOn(!isEyeOn);
+  };
 
   return (
     <Page>
@@ -118,9 +124,10 @@ const HomePage = () => {
                   <span className="mr-2 text-gray-800">username</span>
                   <img src="./assets/image/VIP.svg" alt="VIP" />
                   <img
-                    src="./assets/image/eye-on.svg"
-                    className="ml-2 h-5 w-5 text-gray-500"
+                    src={`./assets/image/${isEyeOn ? "eye-on" : "eye-off"}.svg`}
+                    className="ml-2 h-5 w-5 cursor-pointer text-gray-500"
                     alt="eye"
+                    onClick={toggleEye} // Toggle the eye icon on click
                   />
                 </div>
                 <div className="flex items-center gap-2">
@@ -136,15 +143,15 @@ const HomePage = () => {
               </div>
             </div>
             <div className="flex">
-              <div className="mr-2 flex h-12 w-12 items-center justify-center rounded-full bg-purple-600">
+              <Button className="mr-2 flex h-12 w-12 items-center justify-center rounded-full bg-purple-600">
                 <img src="./assets/image/chat.svg" className="h-5 w-5" />
-              </div>
-              <div className="flex h-12 w-12 items-center justify-center rounded-full bg-purple-600">
+              </Button>
+              <Button className="flex h-12 w-12 items-center justify-center rounded-full bg-purple-600">
                 <img
                   src="./assets/image/customer-service.svg"
                   className="h-5 w-5"
                 />
-              </div>
+              </Button>
             </div>
           </div>
         </div>
