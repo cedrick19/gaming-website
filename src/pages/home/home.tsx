@@ -26,10 +26,18 @@ const HomePage = () => {
   const { t } = useTranslation();
   const [isHovered, setIsHovered] = useState(false);
   const [isEyeOn, setIsEyeOn] = useState(true);
+  const [isSpinning, setIsSpinning] = useState(false);
   const isMobile = getDevice().ios || getDevice().android;
 
   const toggleEye = () => {
     setIsEyeOn(!isEyeOn);
+  };
+
+  const handleRefreshClick = () => {
+    setIsSpinning(true);
+    setTimeout(() => {
+      setIsSpinning(false);
+    }, 400);
   };
 
   return (
@@ -134,8 +142,11 @@ const HomePage = () => {
                   <div className="flex h-6 w-6 items-center justify-center rounded-full bg-purple-900">
                     <img
                       src="./assets/image/refresh.svg"
-                      className="h-3 w-3"
+                      className={`h-3 w-3 cursor-pointer transition-transform duration-1000 ${
+                        isSpinning ? "rotate-[1080deg]" : ""
+                      }`}
                       alt="refresh"
+                      onClick={handleRefreshClick}
                     />
                   </div>
                 </div>
