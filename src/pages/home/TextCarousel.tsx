@@ -20,16 +20,13 @@ export default function MarqueeNotification() {
     let currentPosition = containerWidth;
 
     const animate = () => {
-      // If the content has fully scrolled off-screen, reset position to the start
       if (currentPosition <= -contentWidth) {
         currentPosition = containerWidth;
       }
 
-      // Update the position to move the content to the left
       currentPosition -= 1;
       setPosition(currentPosition);
 
-      // Continue animation
       requestAnimationFrame(animate);
     };
 
@@ -41,12 +38,12 @@ export default function MarqueeNotification() {
   }, []);
 
   return (
-    <div className="mx-5 overflow-hidden rounded-full border-[3px] border-purple-500 bg-white shadow-md">
+    <div className="mx-5 overflow-hidden rounded-full border-[3px] border-purple-900 bg-white shadow-md">
       <div
         ref={containerRef}
         className="relative flex h-9 w-full overflow-hidden rounded-full"
       >
-        <div className="absolute left-0 top-0 z-10 flex h-full items-center rounded-l-full bg-purple-600 px-3">
+        <div className="absolute left-0 top-0 z-10 flex h-full items-center rounded-l-full bg-purple-900 px-3">
           <Icon f7="speaker_1_fill" className="h-6 w-6 text-white" />
         </div>
 
@@ -59,7 +56,6 @@ export default function MarqueeNotification() {
           }}
         >
           <div className="flex items-center">
-            {/* This will duplicate the content */}
             {notificationData.map((item, index) => (
               <span key={index} className="mr-8 flex items-center px-2">
                 <span className="font-medium">{item.message}</span>

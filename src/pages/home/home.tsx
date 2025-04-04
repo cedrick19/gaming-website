@@ -28,7 +28,6 @@ const HomePage = () => {
   const [isEyeOn, setIsEyeOn] = useState(true); // State to toggle eye icon
   const isMobile = getDevice().ios || getDevice().android;
 
-  // Toggle the eye icon
   const toggleEye = () => {
     setIsEyeOn(!isEyeOn);
   };
@@ -110,7 +109,7 @@ const HomePage = () => {
       </div>
 
       {isMobile && (
-        <div className="space-y-5 rounded-b-[2rem] border-violet-500 p-3 pt-3 shadow-[0_4px_10px_rgba(138,43,226,0.5),0_2px_5px_rgba(138,43,226,0.3)]">
+        <div className="space-y-5 rounded-b-[2rem] border-violet-800 p-3 pt-3 shadow-[0_4px_10px_rgba(138,43,226,0.5),0_2px_5px_rgba(138,43,226,0.3)]">
           <TextCarousel />
           <div className="flex w-full items-center justify-between p-3">
             <div className="flex items-center">
@@ -127,12 +126,12 @@ const HomePage = () => {
                     src={`./assets/image/${isEyeOn ? "eye-on" : "eye-off"}.svg`}
                     className="ml-2 h-5 w-5 cursor-pointer text-gray-500"
                     alt="eye"
-                    onClick={toggleEye} // Toggle the eye icon on click
+                    onClick={toggleEye}
                   />
                 </div>
                 <div className="flex items-center gap-2">
                   <span className="text-2xl font-bold">0.00</span>
-                  <div className="flex h-6 w-6 items-center justify-center rounded-full bg-purple-600">
+                  <div className="flex h-6 w-6 items-center justify-center rounded-full bg-purple-900">
                     <img
                       src="./assets/image/refresh.svg"
                       className="h-3 w-3"
@@ -143,10 +142,10 @@ const HomePage = () => {
               </div>
             </div>
             <div className="flex">
-              <Button className="mr-2 flex h-12 w-12 items-center justify-center rounded-full bg-purple-600">
+              <Button className="mr-2 flex h-12 w-12 items-center justify-center rounded-full bg-purple-900">
                 <img src="./assets/image/chat.svg" className="h-5 w-5" />
               </Button>
-              <Button className="flex h-12 w-12 items-center justify-center rounded-full bg-purple-600">
+              <Button className="flex h-12 w-12 items-center justify-center rounded-full bg-purple-900">
                 <img
                   src="./assets/image/customer-service.svg"
                   className="h-5 w-5"
