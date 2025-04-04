@@ -25,7 +25,7 @@ import TextCarousel from "./TextCarousel";
 const HomePage = () => {
   const { t } = useTranslation();
   const [isHovered, setIsHovered] = useState(false);
-  const [isEyeOn, setIsEyeOn] = useState(true); // State to toggle eye icon
+  const [isEyeOn, setIsEyeOn] = useState(true);
   const isMobile = getDevice().ios || getDevice().android;
 
   const toggleEye = () => {
