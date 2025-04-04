@@ -37,10 +37,10 @@ export default function MarqueeNotification() {
   }, []);
 
   return (
-    <div className="mx-5 overflow-hidden rounded-full border-[3px] border-purple-900 bg-white shadow-md">
+    <div className="mx-5 overflow-hidden rounded-full border-[2px] border-purple-900 bg-white shadow-md">
       <div
         ref={containerRef}
-        className="relative flex h-9 w-full overflow-hidden rounded-full"
+        className="relative flex h-[34px] w-full overflow-hidden rounded-full"
       >
         <div className="absolute left-0 top-0 z-10 flex h-full items-center rounded-l-full bg-purple-900 px-3">
           <img
