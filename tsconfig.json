@@ -4,9 +4,9 @@
     "module": "ESNext",
     "jsx": "react-jsx",
     "strict": true,
-    "baseUrl": "./",
+    "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": ["./src/*"]
     },
     "noUnusedLocals": true,
     "allowJs": false,
@@ -15,6 +15,6 @@
     "noImplicitAny": true,
     "moduleResolution": "bundler"
   },
-  "include": ["src"],
+  "include": ["src/**/*", "src/ts/custom.d.ts"],
   "exclude": ["node_modules", "dist"]
 }

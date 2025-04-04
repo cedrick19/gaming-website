@@ -11,7 +11,8 @@ module.exports = {
       },
       colors: {
         "primary": "#A03D8C",
-        "secondary": "#4C2CCA"
+        "secondary": "#4C2CCA",
+        "inactive": "#AD9DCE",
       },
       fontFamily : {
         sans: ["Nunito", "sans-serif"],

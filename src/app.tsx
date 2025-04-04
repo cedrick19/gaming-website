@@ -1,6 +1,6 @@
 import type React from "react";
 
-import { App, f7, View } from "framework7-react";
+import { App, f7,} from "framework7-react";
 import { useEffect } from "react";
 import routes from "./ts/routes";
 import NavBar from "./components/nav-bar/Navigation";
@@ -26,7 +26,6 @@ const MyApp: React.FC = () => {
     <AuthProvider>
       <App {...appConfig}>
         <NavBar />
-        <View main tab url="/" browserHistory browserHistorySeparator="" />
 
         <CustomModal
           title="Welcome!"
