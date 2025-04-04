@@ -277,8 +277,6 @@ const NavBar = () => {
           main={id === "view-home"}
           tabActive={id === "view-home"}
           url={path}
-          browserHistory
-          browserHistorySeparator=""
         />
       ))}
     </Views>
