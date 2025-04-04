@@ -1,6 +1,5 @@
 import {
   Block,
-  Icon,
   Link,
   Page,
   Navbar,
@@ -29,30 +28,28 @@ const HomePage = () => {
 
   return (
     <Page>
-      {/* Mobile Banner Layout */}
       {isMobile && (
         <Navbar innerClassName="p-5 bg-gradient-to-r from-secondary/0 to-secondary/20">
           <NavLeft>
             <Link tabLink="#view-home">
-              <img
-                src="/assets/image/U8logo.png" // Replace with your image URL
-                alt="U8.COM Logo"
-                className="h-7 w-auto" // Make the image fill the height of the navbar, width auto to maintain aspect ratio
-              />
+              <img src="/assets/image/logo.svg" className="h-7 w-auto" />
             </Link>
             <Link href="#">
               <img
-                src="/assets/image/Telegram.png" // Replace with your image URL
+                src="/assets/image/Telegram.png"
                 alt="Telegram Logo"
-                className="h-full w-auto" // Make the image fill the height of the navbar, width auto to maintain aspect ratio
+                className="h-full w-auto"
               />
             </Link>
           </NavLeft>
 
-          {/* Add NavRight for the notification icon */}
-          <NavRight className="flex items-center space-x-4">
-            <Link href="#" className="flex items-center">
-              <Icon f7="bell" className="text-xl text-white" />{" "}
+          <NavRight className="flex items-center">
+            <Link href="#">
+              <img
+                src="./assets/image/bell.svg"
+                alt="Promotional Banner 1"
+                className="text-xl text-white"
+              />
             </Link>
           </NavRight>
         </Navbar>
@@ -107,7 +104,7 @@ const HomePage = () => {
       </div>
 
       <TextCarousel />
-      <div className="flex w-full items-center justify-between rounded-b-[2rem] border-b-2 border-violet-500 p-5 shadow-[0_4px_10px_rgba(138,43,226,0.5)]">
+      <div className="flex w-full items-center justify-between rounded-b-[2rem] border-b-2 border-violet-500 p-5 shadow-[0_4px_10px_rgba(138,43,226,0.5),0_2px_5px_rgba(138,43,226,0.3)]">
         <div className="flex items-center">
           <img
             src="./assets/image/playeraccount.jpg"
@@ -117,25 +114,37 @@ const HomePage = () => {
           <div className="ml-3">
             <div className="flex items-center">
               <span className="mr-2 text-gray-800">username</span>
-              <div className="rounded-lg bg-yellow-400 px-2 py-0.5 text-xs font-bold">
-                VIP 0
-              </div>
-              <Icon f7="eye" className="ml-2 h-5 w-5 text-gray-500" />
+
+              <img src="./assets/image/VIP.svg" alt="VIP" className="" />
+
+              <img
+                src="./assets/image/eye-on.svg"
+                className="ml-2 h-5 w-5 text-gray-500"
+                alt="eye"
+              />
             </div>
-            <div className="flex items-center">
+            <div className="flex items-center gap-2">
               <span className="text-2xl font-bold">0.00</span>
-              <div className="flex h-6 w-6 rounded-full bg-purple-500">
-                <Icon f7="gobackward" className="text-xl text-white" />
+
+              <div className="flex h-6 w-6 items-center justify-center rounded-full bg-purple-500">
+                <img
+                  src="./assets/image/refresh.svg"
+                  className="h-3 w-3"
+                  alt="refresh"
+                />
               </div>
             </div>
           </div>
         </div>
         <div className="flex">
           <div className="mr-2 flex h-12 w-12 items-center justify-center rounded-full bg-purple-600">
-            <Icon f7="bubble_right" className="h-6 w-6 text-white" />
+            <img src="./assets/image/chat.svg" className="h-5 w-5" />
           </div>
           <div className="flex h-12 w-12 items-center justify-center rounded-full bg-purple-600">
-            <Icon f7="phone" className="h-6 w-6 text-white" />
+            <img
+              src="./assets/image/customer-service.svg"
+              className="h-5 w-5"
+            />
           </div>
         </div>
       </div>
