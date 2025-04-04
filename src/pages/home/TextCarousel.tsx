@@ -1,4 +1,3 @@
-import { Icon } from "framework7-react";
 import { useEffect, useRef, useState } from "react";
 
 export default function MarqueeNotification() {
@@ -44,7 +43,12 @@ export default function MarqueeNotification() {
         className="relative flex h-9 w-full overflow-hidden rounded-full"
       >
         <div className="absolute left-0 top-0 z-10 flex h-full items-center rounded-l-full bg-purple-900 px-3">
-          <Icon f7="speaker_1_fill" className="h-6 w-6 text-white" />
+          {/* <Icon f7="speaker_1_fill" className="h-6 w-6 text-white" /> */}
+          <img
+            src="./assets/image/announcement.svg"
+            className="h-6 w-6"
+            alt="announcement"
+          />
         </div>
 
         <div
