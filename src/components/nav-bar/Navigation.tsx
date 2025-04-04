@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { PageData } from "@/ts/PageData";
 import {
   f7,
@@ -11,7 +11,6 @@ import {
   Button,
 } from "framework7-react";
 import { useAuth } from "../AuthContext";
-import { getDevice } from "framework7";
 
 const NavLinks = ({
   isMobile,
@@ -43,38 +42,36 @@ const NavLinks = ({
           ),
         )
       ) : (
-        <>
-          <Block className="flex w-3/5 justify-center">
-            <Block className="flex space-x-6 text-xs">
-              {PageData.filter(
-                (page) => page.name !== "Games" && page.name !== "Profile",
-              ).map(({ id, name, path }, index) => (
-                <Link
-                  key={index}
-                  tabLink={`#${id}`}
-                  tabLinkActive={id === activeTab}
-                  rippleColor="none"
-                  onClick={() => handleNavFunc(path, id)}
+        <Block className="flex w-3/5 justify-center">
+          <Block className="flex space-x-6 text-xs">
+            {PageData.filter(
+              (page) => page.name !== "Games" && page.name !== "Profile",
+            ).map(({ id, name, path }, index) => (
+              <Link
+                key={index}
+                tabLink={`#${id}`}
+                tabLinkActive={id === activeTab}
+                rippleColor="none"
+                onClick={() => handleNavFunc(path, id)}
+                className={`whitespace-nowrap no-underline ${
+                  activeTab === id
+                    ? "bg-primary-gradient bg-clip-text font-black text-transparent"
+                    : "font-semibold text-gray-700"
+                }`}
+              >
+                <span
                   className={`whitespace-nowrap no-underline ${
                     activeTab === id
                       ? "bg-primary-gradient bg-clip-text font-black text-transparent"
                       : "font-semibold text-gray-700"
                   }`}
                 >
-                  <span
-                    className={`whitespace-nowrap no-underline ${
-                      activeTab === id
-                        ? "bg-primary-gradient bg-clip-text font-black text-transparent"
-                        : "font-semibold text-gray-700"
-                    }`}
-                  >
-                    {name.toUpperCase()}
-                  </span>
-                </Link>
-              ))}
-            </Block>
+                  {name.toUpperCase()}
+                </span>
+              </Link>
+            ))}
           </Block>
-        </>
+        </Block>
       )}
     </>
   );
@@ -111,7 +108,31 @@ const UserProfile = ({
 };
 
 const NavBar = () => {
-  const isMobile = getDevice().android || getDevice().ios;
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkDevice = () => {
+      const width = window.innerWidth;
+      const height = window.innerHeight;
+
+      if (
+        (width <= 1024 && height <= 1366) ||
+        (width === 820 && height === 1180) ||
+        (width === 912 && height === 1368)
+      ) {
+        setIsMobile(true);
+      } else {
+        setIsMobile(false);
+      }
+    };
+
+    checkDevice();
+    window.addEventListener("resize", checkDevice);
+    return () => {
+      window.removeEventListener("resize", checkDevice);
+    };
+  }, []);
+
   const { isLoggedIn, activeTabId, setActiveTabId } = useAuth();
 
   const f7nav = (path: string, id: string) => {

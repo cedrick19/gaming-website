@@ -19,7 +19,7 @@ import "swiper/css/navigation";
 
 import Layout from "@/layout/layout";
 import { getDevice } from "framework7";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import TextCarousel from "./TextCarousel";
 
 const HomePage = () => {
@@ -27,7 +27,24 @@ const HomePage = () => {
   const [isHovered, setIsHovered] = useState(false);
   const [isEyeOn, setIsEyeOn] = useState(true);
   const [isSpinning, setIsSpinning] = useState(false);
+
   const isMobile = getDevice().ios || getDevice().android;
+
+  const [isTablet, setIsTablet] = useState(false);
+
+  useEffect(() => {
+    const checkTablet = () => {
+      const width = window.innerWidth;
+      setIsTablet(width >= 600 && width <= 1024);
+    };
+
+    checkTablet();
+
+    window.addEventListener("resize", checkTablet);
+    return () => {
+      window.removeEventListener("resize", checkTablet);
+    };
+  }, []);
 
   const toggleEye = () => {
     setIsEyeOn(!isEyeOn);
@@ -42,8 +59,9 @@ const HomePage = () => {
 
   return (
     <Page>
-      {isMobile && (
-        <Navbar innerClassName=" bg-gradient-to-r from-secondary/0 to-secondary/20">
+      {/* Navbar for mobile and tablet */}
+      {(isMobile || isTablet) && (
+        <Navbar innerClassName="bg-gradient-to-r from-secondary/0 to-secondary/20">
           <NavLeft>
             <Link tabLink="#view-home">
               <img src="/assets/image/logo.svg" className="h-7 w-auto" />
@@ -52,7 +70,7 @@ const HomePage = () => {
               <img
                 src="/assets/image/Telegram.png"
                 alt="Telegram Logo"
-                className="h-full w-auto"
+                className="h-full w-full"
               />
             </Link>
           </NavLeft>
@@ -103,20 +121,17 @@ const HomePage = () => {
 
         <div className="hidden md:block">
           <Button
-            className={`swiper-button-prev absolute left-4 top-1/2 hidden bg-opacity-60 p-4 text-white transition-opacity duration-300 md:flex ${
-              isHovered ? "opacity-100" : "opacity-0"
-            }`}
+            className={`swiper-button-prev absolute left-4 top-1/2 hidden bg-opacity-60 p-4 text-white transition-opacity duration-300 md:flex ${isHovered ? "opacity-100" : "opacity-0"}`}
           />
 
           <Button
-            className={`swiper-button-next absolute right-4 top-1/2 hidden bg-opacity-60 p-4 text-white transition-opacity duration-300 md:flex ${
-              isHovered ? "opacity-100" : "opacity-0"
-            }`}
+            className={`swiper-button-next absolute right-4 top-1/2 hidden bg-opacity-60 p-4 text-white transition-opacity duration-300 md:flex ${isHovered ? "opacity-100" : "opacity-0"}`}
           />
         </div>
       </div>
 
-      {isMobile && (
+      {/* Conditional content for mobile or tablet */}
+      {(isMobile || isTablet) && (
         <div className="space-y-5 rounded-b-[2rem] border-violet-800 p-3 pt-3 shadow-[0_4px_10px_rgba(138,43,226,0.5),0_2px_5px_rgba(138,43,226,0.3)]">
           <TextCarousel />
           <div className="flex w-full items-center justify-between p-3">
@@ -142,9 +157,7 @@ const HomePage = () => {
                   <div className="flex h-6 w-6 items-center justify-center rounded-full bg-purple-900">
                     <img
                       src="./assets/image/refresh.svg"
-                      className={`h-3 w-3 cursor-pointer transition-transform duration-1000 ${
-                        isSpinning ? "rotate-[1080deg]" : ""
-                      }`}
+                      className={`h-3 w-3 cursor-pointer transition-transform duration-1000 ${isSpinning ? "rotate-[1080deg]" : ""}`}
                       alt="refresh"
                       onClick={handleRefreshClick}
                     />
